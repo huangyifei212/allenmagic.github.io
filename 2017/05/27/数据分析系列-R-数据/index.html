@@ -1,0 +1,836 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="技术,数据分析,R," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="引言上次做了R的介绍和安装点击这里直达，主要介绍了在各个不同的系统中怎么安装R软件，还基础的介绍了怎么使用R，今天探讨下R的数据相关的知识。">
+<meta name="keywords" content="技术,数据分析,R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据分析系列-R-数据">
+<meta property="og:url" content="http://yoursite.com/2017/05/27/数据分析系列-R-数据/index.html">
+<meta property="og:site_name" content="Egg's Blog">
+<meta property="og:description" content="引言上次做了R的介绍和安装点击这里直达，主要介绍了在各个不同的系统中怎么安装R软件，还基础的介绍了怎么使用R，今天探讨下R的数据相关的知识。">
+<meta property="og:updated_time" content="2017-05-27T05:59:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据分析系列-R-数据">
+<meta name="twitter:description" content="引言上次做了R的介绍和安装点击这里直达，主要介绍了在各个不同的系统中怎么安装R软件，还基础的介绍了怎么使用R，今天探讨下R的数据相关的知识。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索内容","hits_empty":"没有发现任何踪迹: ${query}","hits_stats":"${time} ms 连击 ${hits} 结果"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/27/数据分析系列-R-数据/"/>
+
+
+
+
+
+  <title> 数据分析系列-R-数据 | Egg's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Egg's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个傻子</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/27/数据分析系列-R-数据/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eggs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Egg's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据分析系列-R-数据
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T08:26:25+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据分析/" itemprop="url" rel="index">
+                    <span itemprop="name">数据分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>上次做了R的介绍和安装<a href="http://eggs.pw/2017/04/19/%E5%AD%A6%E4%B9%A0R%E7%B3%BB%E5%88%97-1-%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%89%E8%A3%85/" target="_blank" rel="external">点击这里直达</a>，主要介绍了在各个不同的系统中怎么安装R软件，还基础的介绍了怎么使用R，今天探讨下R的数据相关的知识。</p>
+<a id="more"></a>
+<h3 id="R的对象"><a href="#R的对象" class="headerlink" title="R的对象"></a>R的对象</h3><p>R中的所有对象都建立在一组基本的内嵌对象之上的，<strong>对象的类</strong>决定了其在R中的存储方式，同时R的对象也都属于某个类，而R提供了一组面向对象编程的机制。_这段话我也没懂!_</p>
+<h4 id="R的基本对象类型"><a href="#R的基本对象类型" class="headerlink" title="R的基本对象类型"></a>R的基本对象类型</h4><p>R有如下的基本对象类型：</p>
+<ul>
+<li>基本向量</li>
+<li>复合对象</li>
+<li>特殊对象</li>
+<li>R语言（即R代码）</li>
+<li>函数</li>
+<li>内置对象</li>
+<li>字节码对象</li>
+</ul>
+<p>以下简单介绍以下R的常用的对象。</p>
+<h4 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h4><p>向量是R中最基本的对象，也是最常用的存储数据的对象。特别的，向量中的元素都会被转成同样的数据类型，也就是说向量的元素都是同种类的数据。R有多种创建向量的方法，其中最常见的是c函数：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; v &lt;- c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</div><div class="line">&gt; v</div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></div></pre></td></tr></table></figure></p>
+<p>另外，我们可以使用操作符<code>:</code>生成向量:<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="number">1</span>:<span class="number">10</span></div><div class="line"> [<span class="number">1</span>]  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span></div></pre></td></tr></table></figure></p>
+<p>另外一个更加灵活的是seq函数方式：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; seq(from=<span class="number">1</span>, to=<span class="number">10</span>, by=<span class="number">2</span>)</div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">3</span> <span class="number">5</span> <span class="number">7</span> <span class="number">9</span></div></pre></td></tr></table></figure></p>
+<p>其中by参数理解为步长，表示生成从1到10步长为2的向量。<code>seq</code>还有其它很多种用法来生成序列，可以使用<code>help(&#39;seq&#39;)</code>来查看帮助文档。</p>
+<h5 id="逻辑向量"><a href="#逻辑向量" class="headerlink" title="逻辑向量"></a>逻辑向量</h5><p>这里特别说明下逻辑向量，R是允许操作逻辑向量的。其中逻辑向量的元素可以被赋予的值有<code>TRUE</code>,<code>FALSE</code>和<code>NA</code>,我们可以试试下面的语句:<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; v</div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></div><div class="line">&gt; m &lt;- v &gt; <span class="number">2.5</span></div><div class="line">&gt; m</div><div class="line">[<span class="number">1</span>] <span class="literal">FALSE</span> <span class="literal">FALSE</span>  <span class="literal">TRUE</span>  <span class="literal">TRUE</span></div><div class="line">&gt; class(m)</div><div class="line">[<span class="number">1</span>] <span class="string">"logical"</span></div></pre></td></tr></table></figure></p>
+<p>其中v是第一个代码创建的向量。而m就是我们通过逻辑运算符$\lt、\leq、\gt、\geq$来判断生成的一个向量。</p>
+<h4 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h4><p>矩阵也是R中常用的对象类型，矩阵可以看成多个带有下标类型的的元素集合，和数学中的矩阵类似，一般我们可以把其中某个元素表示为$a_{ij}$，更通用的可视化的矩阵如下:<br>$$<br>\begin{equation}<br>A_{i \times j} =<br> \begin{bmatrix}<br>   a_{11} &amp; a_{12} &amp; a_{13} &amp; \cdots &amp; a_{16} \\<br>   a_{21} &amp; a_{22} &amp; a_{23} &amp; \cdots &amp; a_{26} \\<br>   \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>   a_{i1} &amp; a_{i2} &amp; a_{i3} &amp; \cdots &amp; a_{ij}<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
+<p>在R中生成矩阵的函数为<code>matrix</code>:<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; m &lt;- matrix(c(<span class="number">1</span>:<span class="number">12</span>),c(<span class="number">3</span>,<span class="number">4</span>))</div><div class="line">&gt; m</div><div class="line">     [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] [,<span class="number">4</span>]</div><div class="line">[<span class="number">1</span>,]    <span class="number">1</span>    <span class="number">4</span>    <span class="number">7</span>   <span class="number">10</span></div><div class="line">[<span class="number">2</span>,]    <span class="number">2</span>    <span class="number">5</span>    <span class="number">8</span>   <span class="number">11</span></div><div class="line">[<span class="number">3</span>,]    <span class="number">3</span>    <span class="number">6</span>    <span class="number">9</span>   <span class="number">12</span></div></pre></td></tr></table></figure></p>
+<p>可以看到我们用<code>matrix</code>函数将向量<code>c(1:12)</code>构建成了一个$3 \times 4$的矩阵，并且矩阵的填充是按照列填充的，如果我们想按照行填充命令如下：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; m &lt;- matrix(c(<span class="number">1</span>:<span class="number">12</span>),c(<span class="number">3</span>,<span class="number">4</span>),byrow = <span class="literal">TRUE</span>)</div><div class="line">&gt; m</div><div class="line">     [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] [,<span class="number">4</span>]</div><div class="line">[<span class="number">1</span>,]    <span class="number">1</span>    <span class="number">2</span>    <span class="number">3</span>    <span class="number">4</span></div><div class="line">[<span class="number">2</span>,]    <span class="number">5</span>    <span class="number">6</span>    <span class="number">7</span>    <span class="number">8</span></div><div class="line">[<span class="number">3</span>,]    <span class="number">9</span>   <span class="number">10</span>   <span class="number">11</span>   <span class="number">12</span></div></pre></td></tr></table></figure></p>
+<p>我们这里会看到矩阵m的长度是等于$i \times j$的：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; t &lt;- matrix(c(<span class="number">1</span>:<span class="number">1500</span>),c(<span class="number">30</span>,<span class="number">50</span>))</div><div class="line">&gt; length(t)</div><div class="line">[<span class="number">1</span>] <span class="number">1500</span></div></pre></td></tr></table></figure></p>
+<p>所以创建矩阵时要注意矩阵的长度，否则会产生错误。</p>
+<h4 id="因子"><a href="#因子" class="headerlink" title="因子"></a>因子</h4><p>因子为处理分类数据提供了一种非常有效的方法，因子是一个对<code>等长的的其它向量</code>进行分组的向量对象。R同时提供了有序和无序因子。我们先看一个例子：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; t &lt;- c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>)</div><div class="line">&gt; factor(t)</div><div class="line"> [<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span> <span class="number">5</span> <span class="number">2</span> <span class="number">5</span> <span class="number">2</span> <span class="number">4</span> <span class="number">3</span> <span class="number">1</span> <span class="number">2</span></div><div class="line">Levels: <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span></div></pre></td></tr></table></figure></p>
+<p>首先因子是一个向量，其次因子有个不同的参数就是<code>Levels</code>，这个实际上是向量t中所有的元素去重（unique）后的值，举一个因子的使用：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 假设有若干省的人的提供样本体重数据</span></div><div class="line"><span class="comment"># state表示包含数据的省份</span></div><div class="line">state &lt;- c(<span class="string">"上海"</span>, <span class="string">"山西"</span>, <span class="string">"浙江"</span>, <span class="string">"四川"</span>, <span class="string">"四川"</span>, </div><div class="line">           <span class="string">"广东"</span>, <span class="string">"湖南"</span>, <span class="string">"湖南"</span>, <span class="string">"浙江"</span>, <span class="string">"河南"</span>, </div><div class="line">           <span class="string">"四川"</span>, <span class="string">"河南"</span>, <span class="string">"浙江"</span>, <span class="string">"浙江"</span>, <span class="string">"山西"</span>, </div><div class="line">           <span class="string">"上海"</span>, <span class="string">"山西"</span>, <span class="string">"广东"</span>, <span class="string">"湖南"</span>, <span class="string">"河南"</span>,</div><div class="line">           <span class="string">"浙江"</span>, <span class="string">"四川"</span>, <span class="string">"四川"</span>, <span class="string">"湖南"</span>, <span class="string">"山西"</span>, </div><div class="line">           <span class="string">"江苏"</span>, <span class="string">"四川"</span>, <span class="string">"河南"</span>, <span class="string">"河南"</span>, <span class="string">"江苏"</span>)</div><div class="line"></div><div class="line"><span class="comment"># weight表示对应的省的样本体重数据不含小数</span></div><div class="line">weight &lt;- c(<span class="number">60</span>, <span class="number">49</span>, <span class="number">40</span>, <span class="number">61</span>, <span class="number">64</span>, </div><div class="line">             <span class="number">60</span>, <span class="number">59</span>, <span class="number">54</span>, <span class="number">62</span>, <span class="number">69</span>, </div><div class="line">             <span class="number">70</span>, <span class="number">42</span>, <span class="number">56</span>, <span class="number">61</span>, <span class="number">61</span>, </div><div class="line">             <span class="number">61</span>, <span class="number">58</span>, <span class="number">51</span>, <span class="number">48</span>, <span class="number">65</span>, </div><div class="line">             <span class="number">49</span>, <span class="number">49</span>, <span class="number">41</span>, <span class="number">48</span>, <span class="number">52</span>, </div><div class="line">             <span class="number">46</span>, <span class="number">59</span>, <span class="number">46</span>, <span class="number">58</span>, <span class="number">43</span>)</div><div class="line"></div><div class="line"><span class="comment"># 获取省份的样本的因子水平</span></div><div class="line">fs &lt;- factor(state)</div><div class="line"></div><div class="line"><span class="comment"># 计算每个省份样本的平均体重</span></div><div class="line">average_weight &lt;- tapply(weight, fs, mean)</div></pre></td></tr></table></figure></p>
+<p>计算的结果如下：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; average_weight</div><div class="line">    广东     河南     湖南     江苏     山西     上海     四川     浙江 </div><div class="line"><span class="number">55.50000</span> <span class="number">56.00000</span> <span class="number">52.25000</span> <span class="number">44.50000</span> <span class="number">55.00000</span> <span class="number">60.50000</span> <span class="number">57.33333</span> <span class="number">53.60000</span></div></pre></td></tr></table></figure></p>
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><p>列表是一种泛化的向量（没错它又是向量的变种），但它和向量不同就是列表不要求元素都是同一类型，列表也是有序集合构成的对象，它包含的对象我们又可以成为分量:<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Lst &lt;- list(name=<span class="string">"阿三"</span>, wife=<span class="string">"查无此人"</span>, </div><div class="line">            no.children=<span class="number">3</span>, child.ages=c(<span class="number">4</span>,<span class="number">7</span>,<span class="number">9</span>))</div><div class="line"></div><div class="line"><span class="comment"># 没搞懂老婆都查无此人了怎么还有孩子？手动大笑</span></div></pre></td></tr></table></figure></p>
+<p>其中，列表的分量是可以包含不同的模式或者类型，如一个列表可以包括数值向量、逻辑向量、矩阵、复向量、函数、······，简直是来者不拒。而且分量会被编号，所以可以通过编号来访问分量：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 比如想访问阿三可以这样</span></div><div class="line">&gt; Lst[[<span class="number">1</span>]]</div><div class="line">[<span class="number">1</span>] <span class="string">"阿三"</span></div><div class="line"></div><div class="line"><span class="comment"># 也可以这样</span></div><div class="line">&gt; Lst$name</div><div class="line">[<span class="number">1</span>] <span class="string">"阿三"</span></div><div class="line"></div><div class="line"><span class="comment"># 如果想知道阿三第二个孩子的年龄我们可以这样</span></div><div class="line">&gt; Lst[[<span class="number">4</span>]][<span class="number">2</span>]</div><div class="line">[<span class="number">1</span>] <span class="number">7</span></div><div class="line"></div><div class="line"><span class="comment"># 还可以这样</span></div><div class="line">&gt; Lst$child.ages[<span class="number">2</span>]</div><div class="line">[<span class="number">1</span>] <span class="number">7</span></div><div class="line"></div><div class="line"><span class="comment"># 再来一个彩蛋:定义一个函数，输入阿三的第几个孩子返回一段话</span></div><div class="line">f &lt;- <span class="keyword">function</span>(i)  paste(<span class="string">"我有个朋友叫"</span>,Lst$name,<span class="string">",他的老婆"</span>,Lst$wife,<span class="string">",但是他居然有"</span>,Lst$no.children,<span class="string">"个孩子,而且第"</span>,i,<span class="string">"个孩子"</span>,<span class="keyword">if</span> (Lst$child.ages[i] &gt;= <span class="number">15</span>) <span class="string">"不仅可以读书还可以喝酒了"</span> <span class="keyword">else</span> <span class="keyword">if</span>(Lst$child.ages[i] &lt; <span class="number">15</span> &amp;&amp; Lst$child.ages[i] &gt;= <span class="number">6</span>) <span class="string">"正在苦逼的读书吧"</span> <span class="keyword">else</span> <span class="string">"或许能在幼儿园找个女朋友?"</span> </div><div class="line">                        ,sep=<span class="string">""</span>)</div><div class="line"></div><div class="line"><span class="comment"># 运行结果</span></div><div class="line">&gt; f(<span class="number">1</span>)</div><div class="line">[<span class="number">1</span>] <span class="string">"我有个朋友叫阿三,他的老婆查无此人,但是他居然有3个孩子,而且第1个孩子或许能在幼儿园找个女朋友?"</span></div><div class="line">&gt; f(<span class="number">2</span>)</div><div class="line">[<span class="number">1</span>] <span class="string">"我有个朋友叫阿三,他的老婆查无此人,但是他居然有3个孩子,而且第2个孩子正在苦逼的读书吧"</span></div><div class="line">&gt; f(<span class="number">3</span>)</div><div class="line">[<span class="number">1</span>] <span class="string">"我有个朋友叫阿三,他的老婆查无此人,但是他居然有3个孩子,而且第3个孩子不仅可以读书还可以喝酒了"</span></div><div class="line"></div><div class="line"><span class="comment"># 我到底在玩什么啊！！！！！</span></div></pre></td></tr></table></figure></p>
+<h4 id="数据框"><a href="#数据框" class="headerlink" title="数据框"></a>数据框</h4><p>数据框也是R常用的数据对象，数据框是和矩阵类似的一种结构，在数据框中，不同的列是可以为不同的对象。一般可以使用<code>data.frame</code>函数来创建数据框对象：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 我们沿用因子中的数据即省份的体重样本数据来构建数据框</span></div><div class="line">&gt; weight_by_state &lt;- data.frame(<span class="string">'省份'</span>=state,<span class="string">'体重'</span>=weight)</div></pre></td></tr></table></figure></p>
+<p>如果有符合数据框限制的列表可以直接使用<code>as.data.frame()</code>函数转换为数据框，从外部环境读取数据使用<code>read.table()</code>和<code>read.csv</code>均可以创建数据框。</p>
+<p>一般数据框有如下的限制条件：</p>
+<ul>
+<li>分量必须是向量（数值、字符、逻辑），因子，数值矩阵，列表或其它数据框</li>
+<li>矩阵，列表和数据框为新的数据框提供了尽可能多的变量，因为它们各自拥有列，元素或者变量</li>
+<li>数值向量，逻辑值，因子保持原有格式，而字符向量会被强制转换成因子</li>
+<li>在数据框中以变量形式出现的向量结构必须长度一致，矩阵结构必须有一样的行数</li>
+</ul>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>最后一个介绍的是数组（其余的类型用的较少就不再介绍），数组是数组可以看作是带有多个下标类型相同的元素集合:<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; z &lt;- <span class="number">1</span>:<span class="number">1500</span></div><div class="line">&gt; dim(z) &lt;- c(<span class="number">3</span>,<span class="number">5</span>,<span class="number">100</span>)</div></pre></td></tr></table></figure></p>
+<p>通过对dim属性的赋值（赋值的是维度向量），这样就将向量z成为了一个$3 \times 5 \times 100$的数组。所以z的1500个元素，元素的下标可以从1一直标记到对应元素的值。</p>
+<p>除了<code>dim()</code>函数创建数组，更通用的可以使用<code>array()</code>函数创建数组：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt; s &lt;- array(<span class="number">1</span>:<span class="number">1500</span>,c(<span class="number">3</span>,<span class="number">5</span>,<span class="number">100</span>))</div><div class="line">&gt; class(s)</div><div class="line">[<span class="number">1</span>] <span class="string">"array"</span></div><div class="line"></div><div class="line"><span class="comment">### 对象的模式和属性</span></div><div class="line"></div><div class="line">对象的模式`mode`是指是该对象基本要素的类型，这是专门用来描述一个对 象`特征`的术语。另外还有一个所有对象都有的特征是长度`length`，如果你想知道一个对象更详细的特征可以使用`attributes`函数来获取：</div><div class="line">```r</div><div class="line">&gt; attributes(s)</div><div class="line">$dim</div><div class="line">[1]   3   5 100</div></pre></td></tr></table></figure></p>
+<p>我们把模式和长度称为对象的内在属性。而且对象的模式和长度属性是可以改变的。</p>
+<p>今天在坐火车，就写到这里吧，后面会有继续的内容。<strong>结束</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术/" rel="tag"># 技术</a>
+          
+            <a href="/tags/数据分析/" rel="tag"># 数据分析</a>
+          
+            <a href="/tags/R/" rel="tag"># R</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/25/使用hexo-github搭建静态blog/" rel="prev" title="使用hexo+github搭建静态blog">
+                使用hexo+github搭建静态blog <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Eggs" />
+          <p class="site-author-name" itemprop="name">Eggs</p>
+           
+              <p class="site-description motion-element" itemprop="description">一个爱思考爱学习的傻子</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/allenmagic" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zyx1986" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/a90ae112a3ae" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-lemon-o"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R的对象"><span class="nav-number">2.</span> <span class="nav-text">R的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#R的基本对象类型"><span class="nav-number">2.1.</span> <span class="nav-text">R的基本对象类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#向量"><span class="nav-number">2.2.</span> <span class="nav-text">向量</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#逻辑向量"><span class="nav-number">2.2.1.</span> <span class="nav-text">逻辑向量</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#矩阵"><span class="nav-number">2.3.</span> <span class="nav-text">矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#因子"><span class="nav-number">2.4.</span> <span class="nav-text">因子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列表"><span class="nav-number">2.5.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据框"><span class="nav-number">2.6.</span> <span class="nav-text">数据框</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组"><span class="nav-number">2.7.</span> <span class="nav-text">数组</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-space-shuttle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eggs的博客</span>
+</div>
+
+
+<div class="powered-by">
+  由  Eggs创建
+</div>
+
+<div class="theme-info">
+  不折腾会死 - 想学啊，我教你呀!
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
