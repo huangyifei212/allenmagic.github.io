@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -114,7 +114,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
@@ -379,34 +379,34 @@
 <a id="more"></a>
 <h2 id="基本设置"><a href="#基本设置" class="headerlink" title="基本设置"></a>基本设置</h2><p>在任何文档处理工具中，字体设置是必须的。Word中可以对整个文章使用默认的字体，也可以单独对某部分文字使用不同的字体，而且相对比较简单，只需要选择要设置的部分文字，选择使用的字体就可以了，但是如何个性化的字体比较碎散就需要大量的操作了。</p>
 <p>LaTeX也一样，需要配置使用字体。一般如果不设置，会使用默认的字体：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document, if don&apos;t declare the font, </div><div class="line">LaTeX will use default font which is Computer Modern Roamn created by Donald Knuth. </div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document, if don&apos;t declare the font, </div><div class="line">LaTeX will use default font which is Computer Modern Roamn created by Donald Knuth. </div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>那么输出的效果如下图：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/default-font.png" alt="默认字体输出"></p>
 <p>可以看到，LaTeX使用了其自带的默认字体Computer Modern Roamn（CMR），这个字体是由Donald Knuth<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>创建的。</p>
 <p>另外，默认的设置下是不支持中文字体的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document. \\</div><div class="line">这是一个测试文档</div><div class="line"></div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document. \\</div><div class="line">这是一个测试文档</div><div class="line"></div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>原因在于LaTeX的默认字体CMR并不支持中文。</p>
 <p><img src="http://7viihf.com1.z0.glb.clouddn.com/no-chinese.png" alt="默认不支持中文"></p>
 <h2 id="支持中文"><a href="#支持中文" class="headerlink" title="支持中文"></a>支持中文</h2><p>LaTeX中要支持中文，可以使用CJK环境。但本文不介绍这种方式，xetex（xelatex）支持UTF8编码，所以解决了中文支持的问题。一般我们使用fontspec来调用字体。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec&#125;</div><div class="line">\setmainfont&#123;Comic Sans MS&#125;  % 设置字体为Comic Sans MS</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document. \\</div><div class="line"></div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec&#125;</div><div class="line">\setmainfont&#123;Comic Sans MS&#125;  % 设置字体为Comic Sans MS</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document. \\</div><div class="line"></div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>编译后的文档如下图：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/font1.png" alt="调用了新的字体"></p>
 <p>但是Comic Sans MS也并不支持中文，所以如果输入中文，还是会出现乱码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec&#125;</div><div class="line">\setmainfont&#123;Comic Sans MS&#125;   % 设置字体为Comic Sans MS</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document, we use Comic Sans MS font. \\</div><div class="line">这是一个测试字体的文档。</div><div class="line"></div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec&#125;</div><div class="line">\setmainfont&#123;Comic Sans MS&#125;   % 设置字体为Comic Sans MS</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document, we use Comic Sans MS font. \\</div><div class="line">这是一个测试字体的文档。</div><div class="line"></div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>所示，编译结果的文档如下，中文部分出现了乱码：</p>
 <p><img src="http://7viihf.com1.z0.glb.clouddn.com/noc1.png" alt="调用字体不支持中文"></p>
 <p>我们设置新的字体，字体能够支持中文：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec&#125;</div><div class="line">\setmainfont&#123;MicrosoftYaHei&#125;   % 使用微软雅黑字体</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document, we use MicrosoftYaHei font. \\</div><div class="line">这是一个测试字体的文档，使用微软雅黑字体。</div><div class="line"></div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec&#125;</div><div class="line">\setmainfont&#123;MicrosoftYaHei&#125;   % 使用微软雅黑字体</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document, we use MicrosoftYaHei font. \\</div><div class="line">这是一个测试字体的文档，使用微软雅黑字体。</div><div class="line"></div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>编译结果如图，已经能显示中文了：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/zh-cn.png" alt="显示中文"></p>
 <h2 id="更多设置"><a href="#更多设置" class="headerlink" title="更多设置"></a>更多设置</h2><p>如果只是设置了字体还是不足的，有些配置能让字体显示等更方便，比如连字方式、断行方式等：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec,xunicode, xltxtra&#125;</div><div class="line">\setmainfont&#123;MicrosoftYaHei&#125;   % 使用微软雅黑字体</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document, we use MicrosoftYaHei font. \\</div><div class="line">这是一个测试字体的文档，使用微软雅黑字体，如果不设置断行方式等，那么当输入的文档内容超过一行时，</div><div class="line">不能自动的进行断句，英文断句不用设置，默认了断句方式。</div><div class="line"></div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec,xunicode, xltxtra&#125;</div><div class="line">\setmainfont&#123;MicrosoftYaHei&#125;   % 使用微软雅黑字体</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document, we use MicrosoftYaHei font. \\</div><div class="line">这是一个测试字体的文档，使用微软雅黑字体，如果不设置断行方式等，那么当输入的文档内容超过一行时，</div><div class="line">不能自动的进行断句，英文断句不用设置，默认了断句方式。</div><div class="line"></div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>编译的结果如下，可以看到中文不能智能断行，导致文本内容超出了页面：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/duanju.png" alt="中文不能自动断句"></p>
 <p>所以，可以配置断行的方式，可以由LaTeX自动的对句子断行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec,xunicode, xltxtra&#125;</div><div class="line">\setmainfont&#123;MicrosoftYaHei&#125;   % 使用微软雅黑字体</div><div class="line"></div><div class="line">%-----------------------------------------------------------------</div><div class="line">% 设置文本字体和断句方式</div><div class="line">\XeTeXlinebreaklocale &quot;zh&quot;</div><div class="line">\XeTeXlinebreakskip = 0pt plus 1pt </div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document, we use MicrosoftYaHei font. \\</div><div class="line">这是一个测试字体的文档，使用微软雅黑字体，如果不设置断行方式等，那么当输入的文档内容超过一行时，</div><div class="line">不能自动的进行断句，英文断句不用设置，默认了断句方式。</div><div class="line"></div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec,xunicode, xltxtra&#125;</div><div class="line">\setmainfont&#123;MicrosoftYaHei&#125;   % 使用微软雅黑字体</div><div class="line"></div><div class="line">%-----------------------------------------------------------------</div><div class="line">% 设置文本字体和断句方式</div><div class="line">\XeTeXlinebreaklocale &quot;zh&quot;</div><div class="line">\XeTeXlinebreakskip = 0pt plus 1pt </div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document, we use MicrosoftYaHei font. \\</div><div class="line">这是一个测试字体的文档，使用微软雅黑字体，如果不设置断行方式等，那么当输入的文档内容超过一行时，</div><div class="line">不能自动的进行断句，英文断句不用设置，默认了断句方式。</div><div class="line"></div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>编译后结果如下，中文能够自动的断行了：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/auto-break.png" alt="中文自动断行"></p>
 <h2 id="中英文字体分别设置"><a href="#中英文字体分别设置" class="headerlink" title="中英文字体分别设置"></a>中英文字体分别设置</h2><p>如果设置了默认字体，所有的文本会使用同一个字体，如上面的一些图片，英文和中文使用了同一个微软雅黑字体。事实上，LaTeX可以让中英文分别使用不同的字体。方式是用<code>fontspec</code>和<code>xeCJK</code>分别设置<code>main</code>字体，来使用不同字体：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec,xunicode, xltxtra&#125;</div><div class="line">\usepackage&#123;xeCJK&#125;  % 设置中文字体</div><div class="line">%-----------------------------------------------------------------</div><div class="line">% 定义字体</div><div class="line">\defaultfontfeatures&#123;Mapping=tex-text&#125;</div><div class="line">\setCJKmainfont&#123;圆体-简&#125;  % 中文的字体为圆体</div><div class="line">\setmainfont&#123;Comic Sans MS&#125;  % 英文字体使用Comic Sans MS</div><div class="line"></div><div class="line">%-----------------------------------------------------------------</div><div class="line">% 设置文本字体和断句方式</div><div class="line">\XeTeXlinebreaklocale &quot;zh&quot;</div><div class="line">\XeTeXlinebreakskip = 0pt plus 1pt </div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document, we use Comic Sans MS font for English. \\</div><div class="line">这是一个测试字体的文档，中文使用圆体字体。</div><div class="line"></div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec,xunicode, xltxtra&#125;</div><div class="line">\usepackage&#123;xeCJK&#125;  % 设置中文字体</div><div class="line">%-----------------------------------------------------------------</div><div class="line">% 定义字体</div><div class="line">\defaultfontfeatures&#123;Mapping=tex-text&#125;</div><div class="line">\setCJKmainfont&#123;圆体-简&#125;  % 中文的字体为圆体</div><div class="line">\setmainfont&#123;Comic Sans MS&#125;  % 英文字体使用Comic Sans MS</div><div class="line"></div><div class="line">%-----------------------------------------------------------------</div><div class="line">% 设置文本字体和断句方式</div><div class="line">\XeTeXlinebreaklocale &quot;zh&quot;</div><div class="line">\XeTeXlinebreakskip = 0pt plus 1pt </div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">This is a test document, we use Comic Sans MS font for English. \\</div><div class="line">这是一个测试字体的文档，中文使用圆体字体。</div><div class="line"></div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>编译后的结果如图所以，我们看到中英文使用不同字体：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/hunpai.png" alt="中英文使用不同字体"></p>
 <p><code>main</code>字体是重要使用的字体，还有另外两个字体设置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\setCJKsansfont&#123;MicrosoftYaHei&#125;</div><div class="line">\setCJKmonofont&#123;KaiTi&#125;</div><div class="line">\setsansfont&#123;Cochin&#125;</div><div class="line">\setmonofont&#123;Courier New&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">\setCJKsansfont&#123;MicrosoftYaHei&#125;</div><div class="line">\setCJKmonofont&#123;KaiTi&#125;</div><div class="line">\setsansfont&#123;Cochin&#125;</div><div class="line">\setmonofont&#123;Courier New&#125;</div></pre></td></tr></table></figure>
 <p>分别是<code>sansfont</code>和<code>monofont</code>字体。</p>
 <p>一般而言，<code>fontspec</code>字体设置有很多选项，可以参考其文档。</p>
 <p><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>Donald Knuth是TeX的发明者，LaTeX其实就是基于TeX一系列宏包命令</p>
@@ -538,7 +538,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -549,7 +549,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -560,7 +560,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -734,6 +734,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>

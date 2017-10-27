@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -110,7 +110,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
@@ -386,33 +386,33 @@
 <p>建议Windows用户使用TeXLive，MacOS用户使用MacTeX（当然如果你是高级用户了可以尝试Basic版本的MacTeX，占用空间小）。Linux用户可以下载TeX的软件包，也可以用系统带的包管理器下载。（比如Debian和Ubuntu可以使用apt-get install，Fedora可以使用yum，Arch用户可以使用pacman等）</p>
 <p>编辑文档的工具可以有很多种，最简单的是记事本（但肯定很难用）。一般Windows建议使用<a href="http://www.winedt.com/" target="_blank" rel="external">WinEdt</a>,Linux用户可以使用<a href="http://www.lyx.org/" target="_blank" rel="external">LyX</a>这一个可以预览的TeX编辑软件（几乎等同于所见即所得了），如果熟练了用户可以使用<a href="http://www.sublimetext.com/" target="_blank" rel="external">Sublime Text+LaTeXtools</a>以及<a href="https://www.gnu.org/software/emacs/" target="_blank" rel="external">GNU Emacs</a>。</p>
 <h4 id="三、入门的简单文档"><a href="#三、入门的简单文档" class="headerlink" title="三、入门的简单文档"></a>三、入门的简单文档</h4><p><strong>1、TeX文档的基本框架</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\documentclass[a4paper,11pt]&#123;article&#125;  %声明文档类型为article</div><div class="line">\begin&#123;document&#125;   % 声明文档开始</div><div class="line">	This is a test document for \LaTeX .   %文档内容</div><div class="line">\end&#123;document&#125;	% 文档结束</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">\documentclass[a4paper,11pt]&#123;article&#125;  %声明文档类型为article</div><div class="line">\begin&#123;document&#125;   % 声明文档开始</div><div class="line">	This is a test document for \LaTeX .   %文档内容</div><div class="line">\end&#123;document&#125;	% 文档结束</div></pre></td></tr></table></figure>
 <p>首先要声明文档的样式，LaTeX支持多种文档类型，一般常用的是book、article、report三种。不同的文档类型有不同的结构。”%”后面的内容是注释，不会在编译后生成的文档中显示。</p>
 <p>文档的内容都在\begin{document}和\end{document}之间，\begin{document}表示声明文档内容开始，\end{document}表示文档结束。</p>
 <p><strong>2、支持中文</strong></p>
 <p>LaTeX支持中文的方式有两中，一个使用CJK包然后声明一个CJK环境。另外一个用xunicode使用unicode字符支持中文。本文介绍第二种方式（我不喜欢CJK）。</p>
 <p>示例内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">\documentclass[a4paper,11pt]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec, xunicode, xltxtra&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">	This is a test document for \LaTeX . \\</div><div class="line">	这是一个\LaTeX 中文样本文档。\\</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">\documentclass[a4paper,11pt]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec, xunicode, xltxtra&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">	This is a test document for \LaTeX . \\</div><div class="line">	这是一个\LaTeX 中文样本文档。\\</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>编译后发现内容如下：</p>
 <p><img src="http://7viihf.com1.z0.glb.clouddn.com/test.png" alt="文档内容"></p>
 <p>中文不能正常显示，原因在于字体的设置，因此需要重新设置字体，如果只是简单的使用一种字体，那么可以如下处理：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">\documentclass[a4paper,11pt]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec, xunicode, xltxtra&#125;</div><div class="line">\setmainfont&#123;MicrosoftYaHei&#125;  </div><div class="line">\XeTeXlinebreaklocale &quot;zh&quot;  %中文的断句</div><div class="line">\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">	This is a test document for \LaTeX . \\[10pt]</div><div class="line">	这是一个\LaTeX 中文样本文档。\\</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">\documentclass[a4paper,11pt]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec, xunicode, xltxtra&#125;</div><div class="line">\setmainfont&#123;MicrosoftYaHei&#125;  </div><div class="line">\XeTeXlinebreaklocale &quot;zh&quot;  %中文的断句</div><div class="line">\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">	This is a test document for \LaTeX . \\[10pt]</div><div class="line">	这是一个\LaTeX 中文样本文档。\\</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>特别注意，中文的断句方式和英文是不一样的（英语是自动断句），因此需要声明中文的断句方式为”zh”。\\\[10pt]表示换行，并且下一行和上一行行距为10pt。</p>
 <p>生成的文档如下：</p>
 <p><img src="http://7viihf.com1.z0.glb.clouddn.com/chinese.png" alt="中文文档内容"></p>
 <h4 id="四、更进一步"><a href="#四、更进一步" class="headerlink" title="四、更进一步"></a>四、更进一步</h4><p><strong>1、\\usepackage[option]{package}</strong></p>
 <p>LaTeX很多功能需要宏包提供，所谓宏包就是一个文件提供了很多功能用于作者调用。宏包的调用命令如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">\usepackage[colorlinks,citecolor=green]&#123;hyperef&#125;  %使用超链接宏包</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">\usepackage[colorlinks,citecolor=green]&#123;hyperef&#125;  %使用超链接宏包</div></pre></td></tr></table></figure>
 <p>举例如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">\documentclass[12pt,a4paper,openany,fleqn]&#123;book&#125; %声明文档类型</div><div class="line">\usepackage&#123;fontspec, xunicode, xltxtra&#125; %使用xunicode相关宏包</div><div class="line">\usepackage&#123;tikz&#125; %使用tikz宏包画图</div><div class="line">\usepackage&#123;subfig&#125;  %使用subfig宏包</div><div class="line">\usepackage&#123;color&#125; %使用color宏包调用颜色</div><div class="line">\usepackage&#123;graphicx&#125; %使用graphicx处理图片</div><div class="line">\usepackage&#123;titlesec&#125; %使用titlesec定义章节标题等</div><div class="line">\usepackage&#123;indentfirst&#125; %首行缩进处理</div><div class="line">\usepackage&#123;geometry&#125;  %使用geomtry包设置页面</div><div class="line">\usepackage[colorlinks,linkcolor=black,anchorcolor=blue,citecolor=green]&#123;hyperref&#125; %使用超链接</div><div class="line">\usepackage&#123;wrapfig&#125; %使用wrapfig处理浮动图片</div><div class="line">\usepackage[fleqn]&#123;amsmath&#125; %使用amsmath处理公式</div><div class="line">\usepackage&#123;latexsym&#125;</div><div class="line">\usepackage&#123;booktabs&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">\documentclass[12pt,a4paper,openany,fleqn]&#123;book&#125; %声明文档类型</div><div class="line">\usepackage&#123;fontspec, xunicode, xltxtra&#125; %使用xunicode相关宏包</div><div class="line">\usepackage&#123;tikz&#125; %使用tikz宏包画图</div><div class="line">\usepackage&#123;subfig&#125;  %使用subfig宏包</div><div class="line">\usepackage&#123;color&#125; %使用color宏包调用颜色</div><div class="line">\usepackage&#123;graphicx&#125; %使用graphicx处理图片</div><div class="line">\usepackage&#123;titlesec&#125; %使用titlesec定义章节标题等</div><div class="line">\usepackage&#123;indentfirst&#125; %首行缩进处理</div><div class="line">\usepackage&#123;geometry&#125;  %使用geomtry包设置页面</div><div class="line">\usepackage[colorlinks,linkcolor=black,anchorcolor=blue,citecolor=green]&#123;hyperref&#125; %使用超链接</div><div class="line">\usepackage&#123;wrapfig&#125; %使用wrapfig处理浮动图片</div><div class="line">\usepackage[fleqn]&#123;amsmath&#125; %使用amsmath处理公式</div><div class="line">\usepackage&#123;latexsym&#125;</div><div class="line">\usepackage&#123;booktabs&#125;</div></pre></td></tr></table></figure>
 <p><strong>2、图片处理</strong></p>
 <p>我们写文档时，很多时候都需要添加图片至文档，LaTeX处理图片一般有很多宏包，用的最多的就是graphicx宏包。使用方式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">\documentclass[a4paper,11pt]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec, xunicode, xltxtra&#125;</div><div class="line">\usepackage&#123;graphicx&#125;  %要加载graphicx宏包</div><div class="line"></div><div class="line">\setmainfont&#123;MicrosoftYaHei&#125;  </div><div class="line">\XeTeXlinebreaklocale &quot;zh&quot;  %中文的断句</div><div class="line">\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">	This is a test document for \LaTeX . \\[10pt]</div><div class="line">	这是一个\LaTeX 中文样本文档。\\</div><div class="line">	这个是广发基金的Logo图片。\\</div><div class="line">	\begin&#123;figure&#125;[htbp!]</div><div class="line">	\centering  %图片居中</div><div class="line">	\includegraphics[width=\textwidth]&#123;picture/guangfa.jpg&#125;</div><div class="line">	\label&#123;fig:gflogo&#125;</div><div class="line">	\caption&#123;广发基金LOGO&#125;</div><div class="line">	\end&#123;figure&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">\documentclass[a4paper,11pt]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec, xunicode, xltxtra&#125;</div><div class="line">\usepackage&#123;graphicx&#125;  %要加载graphicx宏包</div><div class="line"></div><div class="line">\setmainfont&#123;MicrosoftYaHei&#125;  </div><div class="line">\XeTeXlinebreaklocale &quot;zh&quot;  %中文的断句</div><div class="line">\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">	This is a test document for \LaTeX . \\[10pt]</div><div class="line">	这是一个\LaTeX 中文样本文档。\\</div><div class="line">	这个是广发基金的Logo图片。\\</div><div class="line">	\begin&#123;figure&#125;[htbp!]</div><div class="line">	\centering  %图片居中</div><div class="line">	\includegraphics[width=\textwidth]&#123;picture/guangfa.jpg&#125;</div><div class="line">	\label&#123;fig:gflogo&#125;</div><div class="line">	\caption&#123;广发基金LOGO&#125;</div><div class="line">	\end&#123;figure&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>编译后生成的文档截图如图所示：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/tupian.png" alt="图片处理的文档截图"></p>
 <p>\\centering是居中的命令，另外也可以用\\begin{center}文档内容\\end{center}居中环境来处理文档居中。</p>
 <p><strong>3、表格处理</strong></p>
 <p>除了图片，我们很多时候还要处理表格。表格可以使用宏包来处理。本示例使用booktabs宏包处理，示例代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">\documentclass[a4paper,11pt]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec, xunicode, xltxtra&#125;</div><div class="line">\usepackage&#123;booktabs&#125;</div><div class="line"></div><div class="line">\setmainfont&#123;MicrosoftYaHei&#125;  </div><div class="line">\XeTeXlinebreaklocale &quot;zh&quot;  %中文的断句</div><div class="line">\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">%处理表格</div><div class="line">\begin&#123;table&#125;[htbp]</div><div class="line">\caption&#123;人员表&#125;</div><div class="line">\label&#123;tab:function&#125;</div><div class="line">\begin&#123;tabular*&#125;&#123;\textwidth&#125;&#123;@&#123;\extracolsep&#123;\fill&#125;&#125;lcc&#125;</div><div class="line">	\toprule %-------------------------------------</div><div class="line">	姓名                 &amp;性别                &amp;年龄  \\</div><div class="line">	\midrule  %------------------------------------</div><div class="line">	张三                 &amp;男                  &amp;20   \\</div><div class="line">	李四                 &amp;男                  &amp;32   \\</div><div class="line">	李倩                 &amp;女                  &amp;25   \\</div><div class="line">	\bottomrule  %---------------------------------        </div><div class="line">\end&#123;tabular*&#125;</div><div class="line">\end&#123;table&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">\documentclass[a4paper,11pt]&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec, xunicode, xltxtra&#125;</div><div class="line">\usepackage&#123;booktabs&#125;</div><div class="line"></div><div class="line">\setmainfont&#123;MicrosoftYaHei&#125;  </div><div class="line">\XeTeXlinebreaklocale &quot;zh&quot;  %中文的断句</div><div class="line">\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">%处理表格</div><div class="line">\begin&#123;table&#125;[htbp]</div><div class="line">\caption&#123;人员表&#125;</div><div class="line">\label&#123;tab:function&#125;</div><div class="line">\begin&#123;tabular*&#125;&#123;\textwidth&#125;&#123;@&#123;\extracolsep&#123;\fill&#125;&#125;lcc&#125;</div><div class="line">	\toprule %-------------------------------------</div><div class="line">	姓名                 &amp;性别                &amp;年龄  \\</div><div class="line">	\midrule  %------------------------------------</div><div class="line">	张三                 &amp;男                  &amp;20   \\</div><div class="line">	李四                 &amp;男                  &amp;32   \\</div><div class="line">	李倩                 &amp;女                  &amp;25   \\</div><div class="line">	\bottomrule  %---------------------------------        </div><div class="line">\end&#123;tabular*&#125;</div><div class="line">\end&#123;table&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>生成的表格图示如下：</p>
 <p><img src="http://7viihf.com1.z0.glb.clouddn.com/table.png" alt="表格内容图片"></p>
 <h4 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h4><p>LaTeX有很多其它的功能，特别是在编写大型文档或者书籍时效率很高。包括写公式、引用、参考文献处理，非常有用。</p>
@@ -546,7 +546,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -557,7 +557,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -568,7 +568,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -742,6 +742,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>

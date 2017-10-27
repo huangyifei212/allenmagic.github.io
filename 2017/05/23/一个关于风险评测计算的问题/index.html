@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -109,7 +109,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
@@ -390,19 +390,19 @@
 <li>计算投资者的分数</li>
 <li>确定投资者的风险等级</li>
 </ol>
-<h3 id="获取所有组合"><a href="#获取所有组合" class="headerlink" title="获取所有组合"></a>获取所有组合</h3><p>我们假设有A、B、C三个选项，对应的分数分别为[25,50,75]:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[A, B, C] = [25, 50, 75]</div></pre></td></tr></table></figure></p>
+<h3 id="获取所有组合"><a href="#获取所有组合" class="headerlink" title="获取所有组合"></a>获取所有组合</h3><p>我们假设有A、B、C三个选项，对应的分数分别为[25,50,75]:<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[A, B, C] = [25, 50, 75]</div></pre></td></tr></table></figure></p>
 <p>总共有6道题，每道题有三个选项，所以答案的组合总共有$3^6=729$个，那么分数的可能性就有729个（实际上应该小于729，因为有不同答案但相同分数）。</p>
 <p>我们不需要获取ABC的答案组合，只需要获得分数[25, 50, 75]的组合即可，所以我思考了不超过10s，就放弃了使用Excel，因为这么多年早忘了当初那丁点的VBA知识了，而这个要用Excel计算的话必须使用VBA，所以果断放弃。</p>
 <p>那么再思考下要怎么计算，我们知道有6个答案，每个答案的分数是[25, 50, 75]中的一个，然后组成一个组合。所以其答案可能是:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[A, A, B, B, C, A] = [25, 25, 50, 50, 75, 25]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[A, A, B, B, C, A] = [25, 25, 50, 50, 75, 25]</div></pre></td></tr></table></figure>
 <p>这样的组合总共有729个，所以要获取所有可能的结果，那么可以使用Python的itertools包中的product就是笛卡尔积来计算所有的可能组合：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> itertools</div><div class="line"></div><div class="line">s = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.product([<span class="number">25</span>,<span class="number">50</span>,<span class="number">75</span>], repeat =<span class="number">6</span> ):</div><div class="line">	s.extend([i])</div></pre></td></tr></table></figure>
-<p>s就是所有的答案分数的组合可能，我们查看下组合的数量：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">print(len(s))</div><div class="line"><span class="number">729</span></div><div class="line">[Finished <span class="keyword">in</span> <span class="number">0.1</span>s]</div></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> itertools</div><div class="line"></div><div class="line">s = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.product([<span class="number">25</span>,<span class="number">50</span>,<span class="number">75</span>], repeat =<span class="number">6</span> ):</div><div class="line">	s.extend([i])</div></pre></td></tr></table></figure>
+<p>s就是所有的答案分数的组合可能，我们查看下组合的数量：<br><figure class="highlight python"><table><tr><td class="code"><pre><div class="line">print(len(s))</div><div class="line"><span class="number">729</span></div><div class="line">[Finished <span class="keyword">in</span> <span class="number">0.1</span>s]</div></pre></td></tr></table></figure></p>
 <h3 id="如何计算？"><a href="#如何计算？" class="headerlink" title="如何计算？"></a>如何计算？</h3><p>我们已经知道了，每个答案组合有对应的分数，以上面的组合为例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[A, A, B, B, C, A] = [25, 25, 50, 50, 75, 25]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[A, A, B, B, C, A] = [25, 25, 50, 50, 75, 25]</div></pre></td></tr></table></figure>
 <p>计算其分值为：250(随机的分数都能是这个值我服了)。</p>
 <p>但我们不能这样简单的计算分值，因为每个问题的分值权重是不一样的，每个问题的重要程度是不一样的，我们预先定义每个问题权重为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[1, 2, 3, 4, 5, 6] = [20%, 20%, 20%, 20%, 10%, 10%]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[1, 2, 3, 4, 5, 6] = [20%, 20%, 20%, 20%, 10%, 10%]</div></pre></td></tr></table></figure>
 <p>所以每个投资者的分数计算公式为：</p>
 <p>$$Score = \sum_{i}^{n=6}score_i \times W_i$$</p>
 <p>$score_{i}$即是答案的分值组合，$W_i$为每个答案分值的权重,重新计算的分数结果就是40分。</p>
@@ -426,51 +426,51 @@
 <ol>
 <li>获取所有分数组合</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> itertools</div><div class="line"></div><div class="line">s = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.product([<span class="number">25</span>,<span class="number">50</span>,<span class="number">75</span>], repeat =<span class="number">6</span> ):</div><div class="line">	s.extend([i])</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> itertools</div><div class="line"></div><div class="line">s = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.product([<span class="number">25</span>,<span class="number">50</span>,<span class="number">75</span>], repeat =<span class="number">6</span> ):</div><div class="line">	s.extend([i])</div></pre></td></tr></table></figure>
 <ol>
 <li>将分数组合生成矩阵</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line">sm = np.mat(s)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line">sm = np.mat(s)</div></pre></td></tr></table></figure>
 <ol>
 <li>构建权重的矩阵</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">w = np.mat([<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.1</span>,<span class="number">0.1</span>])</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line">w = np.mat([<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.1</span>,<span class="number">0.1</span>])</div></pre></td></tr></table></figure>
 <ol>
 <li>矩阵相乘</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">score = np.matrix.tolist(sm*w.T)  % w.T指将矩阵转置为列矩阵</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line">score = np.matrix.tolist(sm*w.T)  % w.T指将矩阵转置为列矩阵</div></pre></td></tr></table></figure>
 <p>这段代码使用了np.matrix.tolist将计算后得到的矩阵直接转换为list列表，后面的第6步和第7步考虑在Python中调用R来实现。</p>
 <h3 id="Python调用R分析数据"><a href="#Python调用R分析数据" class="headerlink" title="Python调用R分析数据"></a>Python调用R分析数据</h3><h4 id="数据的预处理"><a href="#数据的预处理" class="headerlink" title="数据的预处理"></a>数据的预处理</h4><p>首先，需要使用python生成csv文件以供R使用，当然也可以在R中使用rpy2包调用R来分析。</p>
 <ol>
 <li>使用python生成csv文件：</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">writer = csv.writer(file(<span class="string">"score.csv"</span>,<span class="string">'wb'</span>))</div><div class="line">writer.writerow([<span class="string">'Value'</span>])</div><div class="line"></div><div class="line"><span class="keyword">for</span> s <span class="keyword">in</span> score:</div><div class="line">	writer.writerow(s)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line">writer = csv.writer(file(<span class="string">"score.csv"</span>,<span class="string">'wb'</span>))</div><div class="line">writer.writerow([<span class="string">'Value'</span>])</div><div class="line"></div><div class="line"><span class="keyword">for</span> s <span class="keyword">in</span> score:</div><div class="line">	writer.writerow(s)</div></pre></td></tr></table></figure>
 <ol>
 <li>在R中导入数据：</li>
 </ol>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rm(list = ls())</div><div class="line">setwd(<span class="string">"/Users/eggs/Library/Mobile Documents/com~apple~CloudDocs/文档/document"</span>)</div><div class="line">score &lt;- read.csv(<span class="string">"score.csv"</span>,header = <span class="literal">TRUE</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><div class="line">rm(list = ls())</div><div class="line">setwd(<span class="string">"/Users/eggs/Library/Mobile Documents/com~apple~CloudDocs/文档/document"</span>)</div><div class="line">score &lt;- read.csv(<span class="string">"score.csv"</span>,header = <span class="literal">TRUE</span>)</div></pre></td></tr></table></figure>
 <h4 id="怎样分析数据？"><a href="#怎样分析数据？" class="headerlink" title="怎样分析数据？"></a>怎样分析数据？</h4><p>其实分析的思路挺简单，总共有729个总体值，但实际上计算出来的Score值只有21个，所以我们要考虑每个Score值占总体组合的概率。一般我们考虑CDF（cumulative distribution function）就是累积分布函数：</p>
 <p>$$<br>F(X) = F(x \leq X) =<br>\begin{cases}<br>\sum_{i=1}^{x \leq X}P_{x=i}， &amp; \text{x是离散的}  \\[3ex]<br>\int_{-\infty}^{X} f(x)\,dx， &amp; \text{x是连续的}<br>\end{cases}<br>$$</p>
 <p>所以我们可以在R中画出Score的累积分布函数图。</p>
 <h4 id="画累积分布函数图"><a href="#画累积分布函数图" class="headerlink" title="画累积分布函数图"></a>画累积分布函数图</h4><ol>
 <li>画出累积分布图</li>
 </ol>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">par(family=<span class="string">'MicrosoftYaHei'</span>)</div><div class="line">plot(ecdf(score$Value), do.points=<span class="literal">FALSE</span>, verticals=<span class="literal">TRUE</span>, main = <span class="string">'CDF of score'</span>, xlab = <span class="string">'score'</span>, ylab = <span class="string">'CDF'</span> )</div></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><div class="line">par(family=<span class="string">'MicrosoftYaHei'</span>)</div><div class="line">plot(ecdf(score$Value), do.points=<span class="literal">FALSE</span>, verticals=<span class="literal">TRUE</span>, main = <span class="string">'CDF of score'</span>, xlab = <span class="string">'score'</span>, ylab = <span class="string">'CDF'</span> )</div></pre></td></tr></table></figure>
 <p>画出来的图如下：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/cdfofscore.png" alt="测试分数的累计分布图"></p>
 <ol>
 <li>用分位数工具取数</li>
 </ol>
 <p>我们假设取[20%, 80%]分位数的值：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">y &lt;- quantile(score$Value,c(<span class="number">0.2</span>,<span class="number">0.8</span>))</div><div class="line"></div><div class="line"> <span class="number">20</span>%  <span class="number">80</span>% </div><div class="line"><span class="number">42.5</span> <span class="number">57.5</span></div></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><div class="line">y &lt;- quantile(score$Value,c(<span class="number">0.2</span>,<span class="number">0.8</span>))</div><div class="line"></div><div class="line"> <span class="number">20</span>%  <span class="number">80</span>% </div><div class="line"><span class="number">42.5</span> <span class="number">57.5</span></div></pre></td></tr></table></figure>
 <p>那么，我们可以认为：</p>
 <blockquote>
 <p>分数在[0,25)之间的为谨慎型，当然这一类别是理论值，不会通过问卷计算出来<br>分数在[25,42.5]之间的为保守型，占20%比例<br>分数在(42.5,57.5]之间的为谨慎型，占60%比例<br>分数在(57.5,75]之间的为积极型，占20%比例</p>
 </blockquote>
 <h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>在这里简单的做了一个关于风险评测的计算介绍，由于最近比较忙，所以内容写的也不怎么严谨。简单说就是思路清奇，排版华丽（你知道我说的是反话）。而且最近也没写什么，所以只是恰好碰到问题就随便写了篇，姑且看着吧。</p>
-<p>python代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">__author__ = <span class="string">"Eggs"</span></div><div class="line"><span class="comment"># coding: utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> itertools</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> csv</div><div class="line"></div><div class="line">s = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.product([<span class="number">25</span>,<span class="number">50</span>,<span class="number">75</span>], repeat = <span class="number">6</span> ):</div><div class="line">  s.extend([i])</div><div class="line"></div><div class="line">sm = np.mat(s)</div><div class="line">w = np.mat([<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.1</span>,<span class="number">0.1</span>])</div><div class="line"></div><div class="line">score = np.matrix.tolist(sm*w.T)</div><div class="line"></div><div class="line">writer = csv.writer(file(<span class="string">"score.csv"</span>,<span class="string">'wb'</span>))</div><div class="line">writer.writerow([<span class="string">'Value'</span>])</div><div class="line"></div><div class="line"><span class="keyword">for</span> s <span class="keyword">in</span> score:</div><div class="line">  writer.writerow(s)</div></pre></td></tr></table></figure></p>
-<p>R的代码如下：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">rm(list = ls())</div><div class="line">setwd(<span class="string">"/Users/eggs/Library/Mobile Documents/com~apple~CloudDocs/文档/document"</span>)</div><div class="line">score &lt;- read.csv(<span class="string">"score.csv"</span>,header = <span class="literal">TRUE</span>)</div><div class="line">a &lt;- unique(score$Value)</div><div class="line"></div><div class="line">par(family=<span class="string">'MicrosoftYaHei'</span>)</div><div class="line">plot(ecdf(score$Value), do.points=<span class="literal">FALSE</span>, verticals=<span class="literal">TRUE</span>, main = <span class="string">'CDF of score'</span>, xlab = <span class="string">'score'</span>, ylab = <span class="string">'CDF'</span> )</div><div class="line">y &lt;- quantile(score$Value,c(<span class="number">0.2</span>,<span class="number">0.8</span>))</div><div class="line"></div><div class="line">length(score$Value)</div><div class="line">length(a)</div><div class="line">y</div></pre></td></tr></table></figure></p>
-<p>运行的结果如下：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; length(score$Value)</div><div class="line">[<span class="number">1</span>] <span class="number">729</span></div><div class="line">&gt; length(a)</div><div class="line">[<span class="number">1</span>] <span class="number">21</span></div><div class="line">&gt; y</div><div class="line"> <span class="number">20</span>%  <span class="number">80</span>% </div><div class="line"><span class="number">42.5</span> <span class="number">57.5</span></div></pre></td></tr></table></figure></p>
-<p>一个测试：如果我们把题目答案扩展到4个，题目增加为10个，计算的结果如下：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; length(score$Value)</div><div class="line">[<span class="number">1</span>] <span class="number">1048576</span></div><div class="line">&gt; length(a)</div><div class="line">[<span class="number">1</span>] <span class="number">119</span></div><div class="line">&gt; y</div><div class="line"> <span class="number">20</span>%  <span class="number">80</span>% </div><div class="line"><span class="number">43.5</span> <span class="number">56.5</span></div></pre></td></tr></table></figure></p>
+<p>python代码如下：<br><figure class="highlight python"><table><tr><td class="code"><pre><div class="line">__author__ = <span class="string">"Eggs"</span></div><div class="line"><span class="comment"># coding: utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> itertools</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> csv</div><div class="line"></div><div class="line">s = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.product([<span class="number">25</span>,<span class="number">50</span>,<span class="number">75</span>], repeat = <span class="number">6</span> ):</div><div class="line">  s.extend([i])</div><div class="line"></div><div class="line">sm = np.mat(s)</div><div class="line">w = np.mat([<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.1</span>,<span class="number">0.1</span>])</div><div class="line"></div><div class="line">score = np.matrix.tolist(sm*w.T)</div><div class="line"></div><div class="line">writer = csv.writer(file(<span class="string">"score.csv"</span>,<span class="string">'wb'</span>))</div><div class="line">writer.writerow([<span class="string">'Value'</span>])</div><div class="line"></div><div class="line"><span class="keyword">for</span> s <span class="keyword">in</span> score:</div><div class="line">  writer.writerow(s)</div></pre></td></tr></table></figure></p>
+<p>R的代码如下：<br><figure class="highlight r"><table><tr><td class="code"><pre><div class="line">rm(list = ls())</div><div class="line">setwd(<span class="string">"/Users/eggs/Library/Mobile Documents/com~apple~CloudDocs/文档/document"</span>)</div><div class="line">score &lt;- read.csv(<span class="string">"score.csv"</span>,header = <span class="literal">TRUE</span>)</div><div class="line">a &lt;- unique(score$Value)</div><div class="line"></div><div class="line">par(family=<span class="string">'MicrosoftYaHei'</span>)</div><div class="line">plot(ecdf(score$Value), do.points=<span class="literal">FALSE</span>, verticals=<span class="literal">TRUE</span>, main = <span class="string">'CDF of score'</span>, xlab = <span class="string">'score'</span>, ylab = <span class="string">'CDF'</span> )</div><div class="line">y &lt;- quantile(score$Value,c(<span class="number">0.2</span>,<span class="number">0.8</span>))</div><div class="line"></div><div class="line">length(score$Value)</div><div class="line">length(a)</div><div class="line">y</div></pre></td></tr></table></figure></p>
+<p>运行的结果如下：<br><figure class="highlight r"><table><tr><td class="code"><pre><div class="line">&gt; length(score$Value)</div><div class="line">[<span class="number">1</span>] <span class="number">729</span></div><div class="line">&gt; length(a)</div><div class="line">[<span class="number">1</span>] <span class="number">21</span></div><div class="line">&gt; y</div><div class="line"> <span class="number">20</span>%  <span class="number">80</span>% </div><div class="line"><span class="number">42.5</span> <span class="number">57.5</span></div></pre></td></tr></table></figure></p>
+<p>一个测试：如果我们把题目答案扩展到4个，题目增加为10个，计算的结果如下：<br><figure class="highlight r"><table><tr><td class="code"><pre><div class="line">&gt; length(score$Value)</div><div class="line">[<span class="number">1</span>] <span class="number">1048576</span></div><div class="line">&gt; length(a)</div><div class="line">[<span class="number">1</span>] <span class="number">119</span></div><div class="line">&gt; y</div><div class="line"> <span class="number">20</span>%  <span class="number">80</span>% </div><div class="line"><span class="number">43.5</span> <span class="number">56.5</span></div></pre></td></tr></table></figure></p>
 <p>可见总共的样本超过了100万，我们可以用图形观察如下：</p>
 <p>CDF图形：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/uscore.png" alt="CDF"></p>
 <p>概率密度图形：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/density.png" alt="Denstiy"></p>
@@ -607,7 +607,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -618,7 +618,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -629,7 +629,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -803,6 +803,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>

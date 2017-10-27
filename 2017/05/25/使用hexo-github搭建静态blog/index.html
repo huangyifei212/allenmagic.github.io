@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -107,7 +107,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
@@ -404,13 +404,13 @@
 <h5 id="通过Homebrew安装"><a href="#通过Homebrew安装" class="headerlink" title="通过Homebrew安装"></a>通过Homebrew安装</h5><p>强烈建议Mac用户安装<a href="https://brew.sh/index_zh-cn.html" target="_blank" rel="external">Homebrew</a>，通过Homebrew来管理Mac的软件，Homebrew在安装和删除软件上特别方便。</p>
 <ol>
 <li><p>首先安装Homebrew，在终端输入:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div></pre></td></tr></table></figure>
 </li>
 <li><p>安装完Homebrew，可以安装node.js：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install node.js</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">brew install node.js</div></pre></td></tr></table></figure>
 </li>
 <li><p>安装完成后查看：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">node -v</div><div class="line">npm -v</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">node -v</div><div class="line">npm -v</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>以上就完成了node.js和npm的安装。</p>
@@ -431,13 +431,13 @@
 				}
 			});
 		</script>
-<h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><p>安装hexo的命令很简单，在终端输入:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure></p>
-<p>安装完成后可以输入命令查看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo -v</div></pre></td></tr></table></figure></p>
-<h4 id="建立本地站点"><a href="#建立本地站点" class="headerlink" title="建立本地站点"></a>建立本地站点</h4><p>安装完hexo后，需要在本地建立站点并初始化站点:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir blog</div><div class="line">cd blog</div><div class="line">hexo init</div></pre></td></tr></table></figure></p>
-<p>这样一个本地站点就完全建立了，你也可以用一个命令完成以上操作:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init blog</div></pre></td></tr></table></figure></p>
-<p>安装完成后的目录结构为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">├── _config.yml</div><div class="line">├── node_modules</div><div class="line">├── package.json</div><div class="line">├── scaffolds</div><div class="line">├── source</div><div class="line">└── themes</div><div class="line"></div><div class="line">4 directories, 2 files</div></pre></td></tr></table></figure></p>
-<h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><p>在blog目录内依次运行以下命令:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo g</div><div class="line">hexo s</div></pre></td></tr></table></figure></p>
-<p>如果正常则会显示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INFO  Start processing</div><div class="line">INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</div></pre></td></tr></table></figure></p>
+<h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><p>安装hexo的命令很简单，在终端输入:<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure></p>
+<p>安装完成后可以输入命令查看：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">hexo -v</div></pre></td></tr></table></figure></p>
+<h4 id="建立本地站点"><a href="#建立本地站点" class="headerlink" title="建立本地站点"></a>建立本地站点</h4><p>安装完hexo后，需要在本地建立站点并初始化站点:<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">mkdir blog</div><div class="line">cd blog</div><div class="line">hexo init</div></pre></td></tr></table></figure></p>
+<p>这样一个本地站点就完全建立了，你也可以用一个命令完成以上操作:<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">hexo init blog</div></pre></td></tr></table></figure></p>
+<p>安装完成后的目录结构为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">├── _config.yml</div><div class="line">├── node_modules</div><div class="line">├── package.json</div><div class="line">├── scaffolds</div><div class="line">├── source</div><div class="line">└── themes</div><div class="line"></div><div class="line">4 directories, 2 files</div></pre></td></tr></table></figure></p>
+<h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><p>在blog目录内依次运行以下命令:<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo g</div><div class="line">hexo s</div></pre></td></tr></table></figure></p>
+<p>如果正常则会显示：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">INFO  Start processing</div><div class="line">INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</div></pre></td></tr></table></figure></p>
 <p>按住CMD键同时点击<code>http://localhost:4000/</code>就可以在浏览器访问本地站点啦.</p>
 <p><em>完结</em></p>
 <div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Keep it simple, stupid!</span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
@@ -572,7 +572,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -583,7 +583,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -594,7 +594,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -768,6 +768,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>

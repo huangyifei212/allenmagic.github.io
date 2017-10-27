@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -110,7 +110,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
@@ -375,27 +375,27 @@
 <a id="more"></a>
 <h2 id="基本处理"><a href="#基本处理" class="headerlink" title="基本处理"></a>基本处理</h2><p>在使用LaTeX写文档时，不可避免会使用到表格。我们在使用word时，会有内置基本的表格工具，或者直接在Excel等表格工具中进行编辑处理后粘贴过来。但是LaTeX不是这样，LaTeX需要使用宏包才能做出表格，而且LaTeX有很多不同的宏包完成表格的绘制工作。</p>
 <p>标准LaTeX提供<code>array</code>和<code>tabular</code>两个制表环境，它们的的完整格式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\begin&#123;array&#125;[表格位置]&#123;列样式&#125;</div><div class="line">列表内容</div><div class="line">\end&#123;array&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\begin&#123;tabular&#125;[表格位置]&#123;列样式&#125;</div><div class="line">列表内容</div><div class="line">\end&#123;tabular&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\begin&#123;tabular*&#125;&#123;表格总宽度&#125;[表格位置]&#123;列样式&#125;</div><div class="line">列表内容</div><div class="line">\end&#123;tabular*&#125;</div></pre></td></tr></table></figure>
-<p>一般array使用于数组矩阵的排版，并且只能在数学环境中使用，如在equation中使用。绝大多数的情况下我们使用的是tabular环境来绘制表格。可以参考如下的案例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;doc&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;tabular&#125;&#123;lcc&#125;</div><div class="line">    \toprule  %------------------------------</div><div class="line">    功能          &amp;WEB         &amp;APP         \\</div><div class="line">    \midrule  %------------------------------</div><div class="line">    注册          &amp;$\surd$     &amp;$\surd$     \\</div><div class="line">    登录          &amp;$\surd$     &amp;$\surd$     \\</div><div class="line">    推送          &amp;$\times$    &amp;$\surd$     \\</div><div class="line">    \bottomrule</div><div class="line">\end&#123;tabular&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">\begin&#123;array&#125;[表格位置]&#123;列样式&#125;</div><div class="line">列表内容</div><div class="line">\end&#123;array&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">\begin&#123;tabular&#125;[表格位置]&#123;列样式&#125;</div><div class="line">列表内容</div><div class="line">\end&#123;tabular&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">\begin&#123;tabular*&#125;&#123;表格总宽度&#125;[表格位置]&#123;列样式&#125;</div><div class="line">列表内容</div><div class="line">\end&#123;tabular*&#125;</div></pre></td></tr></table></figure>
+<p>一般array使用于数组矩阵的排版，并且只能在数学环境中使用，如在equation中使用。绝大多数的情况下我们使用的是tabular环境来绘制表格。可以参考如下的案例：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;doc&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;tabular&#125;&#123;lcc&#125;</div><div class="line">    \toprule  %------------------------------</div><div class="line">    功能          &amp;WEB         &amp;APP         \\</div><div class="line">    \midrule  %------------------------------</div><div class="line">    注册          &amp;$\surd$     &amp;$\surd$     \\</div><div class="line">    登录          &amp;$\surd$     &amp;$\surd$     \\</div><div class="line">    推送          &amp;$\times$    &amp;$\surd$     \\</div><div class="line">    \bottomrule</div><div class="line">\end&#123;tabular&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure></p>
 <p>那么得到的表格如图所示：</p>
 <p><img src="http://7viihf.com1.z0.glb.clouddn.com/table1.png" alt="示例表格1"></p>
 <h2 id="线框"><a href="#线框" class="headerlink" title="线框"></a>线框</h2><p>我们在Excel表格中经常会有单元格的线条，可以在上面的示例中有{列样式}的选项，我们一般用<code>|</code>来表示竖线框，<code>\hline</code>表示横线框，示例如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;doc&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;tabular&#125;&#123;|l|c|c|&#125;</div><div class="line">	\hline</div><div class="line">	功能          &amp;WEB         &amp;APP         \\ \hline</div><div class="line">	注册          &amp;$\surd$     &amp;$\surd$     \\ \hline</div><div class="line">	登录          &amp;$\surd$     &amp;$\surd$     \\ \hline</div><div class="line">	推送          &amp;$\times$    &amp;$\surd$     \\ \hline</div><div class="line">\end&#123;tabular&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;doc&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;tabular&#125;&#123;|l|c|c|&#125;</div><div class="line">	\hline</div><div class="line">	功能          &amp;WEB         &amp;APP         \\ \hline</div><div class="line">	注册          &amp;$\surd$     &amp;$\surd$     \\ \hline</div><div class="line">	登录          &amp;$\surd$     &amp;$\surd$     \\ \hline</div><div class="line">	推送          &amp;$\times$    &amp;$\surd$     \\ \hline</div><div class="line">\end&#123;tabular&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>得出的表格如图所示：</p>
 <p><img src="http://7viihf.com1.z0.glb.clouddn.com/table2.png" alt="示例表格2"></p>
 <p>其中，在选项中的<code>lc</code>表示该列的内容的位置，有三个参数：<code>l</code>、<code>c</code>、<code>r</code>，分别是左对齐、居中对齐和右对齐</p>
 <h2 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h2><p>一般而言，表格的位置是浮动的，即是会根据文本内容确定，比如以上两个例子其实表格在文本的靠左位置，因此如果需要定义表格的位置。表格的位置为可选的选项:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;doc&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;table&#125;[!htbp]</div><div class="line">\centering</div><div class="line">\begin&#123;tabular&#125;&#123;|l|c|c|&#125;</div><div class="line">    \hline</div><div class="line">    功能          &amp;WEB         &amp;APP         \\ \hline</div><div class="line">    注册          &amp;$\surd$     &amp;$\surd$     \\ \hline</div><div class="line">    登录          &amp;$\surd$     &amp;$\surd$     \\ \hline</div><div class="line">    推送          &amp;$\times$    &amp;$\surd$     \\ \hline</div><div class="line">\end&#123;tabular&#125;</div><div class="line">\end&#123;table&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;doc&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;table&#125;[!htbp]</div><div class="line">\centering</div><div class="line">\begin&#123;tabular&#125;&#123;|l|c|c|&#125;</div><div class="line">    \hline</div><div class="line">    功能          &amp;WEB         &amp;APP         \\ \hline</div><div class="line">    注册          &amp;$\surd$     &amp;$\surd$     \\ \hline</div><div class="line">    登录          &amp;$\surd$     &amp;$\surd$     \\ \hline</div><div class="line">    推送          &amp;$\times$    &amp;$\surd$     \\ \hline</div><div class="line">\end&#123;tabular&#125;</div><div class="line">\end&#123;table&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p><code>\centering</code>表示将表格居中放置，!htbp表示对位置的一种处理：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">!表示无视美学规则，按下面的要求放置；</div><div class="line">然后h t b p分别代表4中放置方式，优先级依次递减</div><div class="line">h=here 放置在代码中这个图片出现的位置，也就是你想让它出现的位置；</div><div class="line">t = top 放在该页顶端；</div><div class="line">b = bottom 放在该页底部；</div><div class="line">p = page 另起一页单独放。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">!表示无视美学规则，按下面的要求放置；</div><div class="line">然后h t b p分别代表4中放置方式，优先级依次递减</div><div class="line">h=here 放置在代码中这个图片出现的位置，也就是你想让它出现的位置；</div><div class="line">t = top 放在该页顶端；</div><div class="line">b = bottom 放在该页底部；</div><div class="line">p = page 另起一页单独放。</div></pre></td></tr></table></figure>
 <h2 id="表格长度"><a href="#表格长度" class="headerlink" title="表格长度"></a>表格长度</h2><p>在以上表格中，我们发现表格的长度和列的内容长度一致，所以会导致有时候表格长度过短，一般来说需要自定义表格长度的时候我们使用<code>tabular*</code>环境：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;doc&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;table&#125;[!p]</div><div class="line">\centering</div><div class="line">\begin&#123;tabular*&#125;&#123;0.75\textwidth&#125;&#123;lcc&#125;</div><div class="line">    \toprule</div><div class="line">    功能          &amp;WEB         &amp;APP         \\ </div><div class="line">    \midrule</div><div class="line">    注册          &amp;$\surd$     &amp;$\surd$     \\ </div><div class="line">    登录          &amp;$\surd$     &amp;$\surd$     \\ </div><div class="line">    推送          &amp;$\times$    &amp;$\surd$     \\ </div><div class="line">    \bottomrule</div><div class="line">\end&#123;tabular*&#125;</div><div class="line">\end&#123;table&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;doc&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;table&#125;[!p]</div><div class="line">\centering</div><div class="line">\begin&#123;tabular*&#125;&#123;0.75\textwidth&#125;&#123;lcc&#125;</div><div class="line">    \toprule</div><div class="line">    功能          &amp;WEB         &amp;APP         \\ </div><div class="line">    \midrule</div><div class="line">    注册          &amp;$\surd$     &amp;$\surd$     \\ </div><div class="line">    登录          &amp;$\surd$     &amp;$\surd$     \\ </div><div class="line">    推送          &amp;$\times$    &amp;$\surd$     \\ </div><div class="line">    \bottomrule</div><div class="line">\end&#123;tabular*&#125;</div><div class="line">\end&#123;table&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>其中<code>{0.75\textwidth}</code>表示表格总长度，<code>\textwidth</code>表示的是这个文档的文本长度，所以这里表示整个文本长度的四分之三。当然你也可以用cm或者pt等单位表示长度，然后绘制的表格如下图所示：</p>
 <p><img src="http://7viihf.com1.z0.glb.clouddn.com/table3.png" alt="示例表格3"></p>
 <p>但是有个特别不好的情况，最后一列的宽度太大，占据了剩余的文本长度，我们需要调整每列的长度，代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;doc&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;table&#125;[!p]</div><div class="line">\centering</div><div class="line">\begin&#123;tabular*&#125;&#123;0.75\textwidth&#125;&#123;@&#123;\extracolsep&#123;\fill&#125;&#125;lcc&#125;</div><div class="line">    \toprule</div><div class="line">    功能          &amp;WEB         &amp;APP         \\ </div><div class="line">    \midrule</div><div class="line">    注册          &amp;$\surd$     &amp;$\surd$     \\ </div><div class="line">    登录          &amp;$\surd$     &amp;$\surd$     \\ </div><div class="line">    推送          &amp;$\times$    &amp;$\surd$     \\ </div><div class="line">    \bottomrule</div><div class="line">\end&#123;tabular*&#125;</div><div class="line">\end&#123;table&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">%!TEX program = xelatex</div><div class="line">\documentclass[12pt,a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;doc&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;table&#125;[!p]</div><div class="line">\centering</div><div class="line">\begin&#123;tabular*&#125;&#123;0.75\textwidth&#125;&#123;@&#123;\extracolsep&#123;\fill&#125;&#125;lcc&#125;</div><div class="line">    \toprule</div><div class="line">    功能          &amp;WEB         &amp;APP         \\ </div><div class="line">    \midrule</div><div class="line">    注册          &amp;$\surd$     &amp;$\surd$     \\ </div><div class="line">    登录          &amp;$\surd$     &amp;$\surd$     \\ </div><div class="line">    推送          &amp;$\times$    &amp;$\surd$     \\ </div><div class="line">    \bottomrule</div><div class="line">\end&#123;tabular*&#125;</div><div class="line">\end&#123;table&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p>这样，表格就好看点了。</p>
 <p><img src="http://7viihf.com1.z0.glb.clouddn.com/table4.png" alt="示例表格4"></p>
 <p>在前一段代码中，我们增加了<code>{@{\extracolsep{\fill}}</code>，表示了把每列的剩余长度均匀的填充，将整个表格更合理的安排列宽。</p>
@@ -528,7 +528,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -539,7 +539,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -550,7 +550,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -724,6 +724,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>

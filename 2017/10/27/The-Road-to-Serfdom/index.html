@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="技术,数据分析,R," />
+  <meta name="keywords" content="哈耶克,自由主义,经济学," />
 
 
 
@@ -87,22 +87,17 @@
 
 
 
-<meta name="description" content="导言 上次说要把以前的笔记整理成文档，首先想要完成的就是R相关的学习笔记。所以近期准备写数据分析系列的文章，先从R开始，后续再介绍Python或者Excel。本文介绍R相关的基本知识和安装。因为这些是比较基础的内容，我并没有相关的学习笔记，所以临时撰写了一篇。">
-<meta name="keywords" content="技术,数据分析,R">
+<meta name="description" content="function editAtGithub(isRaw){     var urlparts = document.location.pathname.split(&apos;/&apos;);     var postname = urlparts[urlparts.length - 2];     if(urlparts.length == 3){ // is a page(wiki about etc)">
+<meta name="keywords" content="哈耶克,自由主义,经济学">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据分析系列-R-初探-介绍和安装">
-<meta property="og:url" content="http://yoursite.com/2017/04/19/学习R系列-1-介绍及安装/index.html">
+<meta property="og:title" content="The Road to Serfdom">
+<meta property="og:url" content="http://yoursite.com/2017/10/27/The-Road-to-Serfdom/index.html">
 <meta property="og:site_name" content="Egg's Blog">
-<meta property="og:description" content="导言 上次说要把以前的笔记整理成文档，首先想要完成的就是R相关的学习笔记。所以近期准备写数据分析系列的文章，先从R开始，后续再介绍Python或者Excel。本文介绍R相关的基本知识和安装。因为这些是比较基础的内容，我并没有相关的学习笔记，所以临时撰写了一篇。">
-<meta property="og:image" content="http://7viihf.com1.z0.glb.clouddn.com/R_cli.png">
-<meta property="og:image" content="http://7viihf.com1.z0.glb.clouddn.com/Rconsole.png">
-<meta property="og:image" content="http://7viihf.com1.z0.glb.clouddn.com/RStudio.png">
-<meta property="og:image" content="http://7viihf.com1.z0.glb.clouddn.com/excel.png">
-<meta property="og:updated_time" content="2017-05-27T05:54:49.000Z">
+<meta property="og:description" content="function editAtGithub(isRaw){     var urlparts = document.location.pathname.split(&apos;/&apos;);     var postname = urlparts[urlparts.length - 2];     if(urlparts.length == 3){ // is a page(wiki about etc)">
+<meta property="og:updated_time" content="2017-10-27T09:38:50.088Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据分析系列-R-初探-介绍和安装">
-<meta name="twitter:description" content="导言 上次说要把以前的笔记整理成文档，首先想要完成的就是R相关的学习笔记。所以近期准备写数据分析系列的文章，先从R开始，后续再介绍Python或者Excel。本文介绍R相关的基本知识和安装。因为这些是比较基础的内容，我并没有相关的学习笔记，所以临时撰写了一篇。">
-<meta name="twitter:image" content="http://7viihf.com1.z0.glb.clouddn.com/R_cli.png">
+<meta name="twitter:title" content="The Road to Serfdom">
+<meta name="twitter:description" content="function editAtGithub(isRaw){     var urlparts = document.location.pathname.split(&apos;/&apos;);     var postname = urlparts[urlparts.length - 2];     if(urlparts.length == 3){ // is a page(wiki about etc)">
 
 
 
@@ -130,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/19/学习R系列-1-介绍及安装/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/27/The-Road-to-Serfdom/"/>
 
 
 
 
 
-  <title> 数据分析系列-R-初探-介绍和安装 | Egg's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> The Road to Serfdom | Egg's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -275,7 +270,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/19/学习R系列-1-介绍及安装/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/27/The-Road-to-Serfdom/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eggs">
@@ -296,7 +291,7 @@
             
             
               
-                数据分析系列-R-初探-介绍和安装
+                The Road to Serfdom
               
             
           </h1>
@@ -311,8 +306,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-19T13:19:19+08:00">
-                2017-04-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-27T16:55:00+08:00">
+                2017-10-27
               </time>
             
 
@@ -334,8 +329,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据分析/" itemprop="url" rel="index">
-                    <span itemprop="name">数据分析</span>
+                  <a href="/categories/经济学/" itemprop="url" rel="index">
+                    <span itemprop="name">经济学</span>
                   </a>
                 </span>
 
@@ -369,42 +364,63 @@
       
 
       
-        <script src="/assets/js/APlayer.min.js"> </script><h3 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h3><blockquote>
-<p>上次说要把以前的笔记整理成文档，首先想要完成的就是R相关的学习笔记。所以近期准备写数据分析系列的文章，先从R开始，后续再介绍Python或者Excel。本文介绍R相关的基本知识和安装。因为这些是比较基础的内容，我并没有相关的学习笔记，所以临时撰写了一篇。</p>
-</blockquote>
+        <script src="/assets/js/APlayer.min.js"> </script>
+
+<p>
+<script>
+  function editAtGithub(isRaw){
+    var url<sub>parts</sub> = document.location.pathname.split('/');
+    var postname = url<sub>parts[url</sub><sub>parts</sub>.length - 2];
+    if(url<sub>parts</sub>.length == 3){ // is a page(wiki about etc)
+      postname = postname + '/index.org';
+    }else{
+      postname = '<sub>posts</sub>/' + postname + '.org';
+    }
+    var url = 'https://github.com/CodeFalling/codefalling.com/tree/source/source/' + postname;
+    if(isRaw)
+      url = 'https://raw.githubusercontent.com/CodeFalling/codefalling.com/source/source/' + postname;
+    window.open(url);
+  }
+</script>
+</p>
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+这篇笔记大概是写在2016年的7月份，那时候买了哈耶克的三本书，分别是《通往奴役之路》、《自由宪章》、《致命的自负》。刚开始因为看到《通往奴役之路》（就是《The Road to Serfdom》这本书）内容比较少，所以就先读了。
+</p>
 <a id="more"></a>
-<h3 id="为什么是R"><a href="#为什么是R" class="headerlink" title="为什么是R"></a>为什么是R</h3><p>我的职业之路是从数据分析开始的，但我是从大学开始学习R的，虽然是断断续续的学习，至少也算入了门。后来在工作中也时不时的用到，R具有一系列的特点就决定了它是个优秀的软件（或者编程语言），所以我希望能够介绍一下它。</p>
-<h3 id="R是什么"><a href="#R是什么" class="headerlink" title="R是什么"></a>R是什么</h3><p>R一般有两种解释：R编程语言和R程序。R语言是由奥克兰大学的Ross Ihaka和Robert Gentleman在20世纪90年代初开发。是一个<a href="https://www.gnu.org/" target="_blank" rel="external">GNU项目</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>,所以R是一个自由开源软件。</p>
-<p>R是一种数据分析工具，意味着你可以像使用Excel那样使用它。不过，它和Excel不同的是，Excel在数据可视的情况下进行处理。R会用不同的对象和数据类型包装原数据，然后操作对象，并不显得直观。但处理数据的效率和大数据的支持，远比Excel优秀。</p>
-<p>R也是一种编程语言，支持面向对象和函数式编程，所以你可以使用R编写数据处理和分析的程序，将数据分析工作做的更轻松。</p>
-<p>和R类似的软件有Matlab,SAS,S-plus,S,SPSS等等，但R是<strong>免费</strong>的…</p>
-<h3 id="安装R"><a href="#安装R" class="headerlink" title="安装R"></a>安装R</h3><p>R是开源软件，你可以自由的获取到安装包，而且R是免费的，其官方网站为：</p>
-<p><a href="https://www.r-project.org/" target="_blank" rel="external">R官方网站</a></p>
-<p>其下载地址为：<br><a href="https://mirrors.tuna.tsinghua.edu.cn/CRAN/" target="_blank" rel="external">Mac版下载地址</a><br><a href="https://mirrors.tuna.tsinghua.edu.cn/CRAN/" target="_blank" rel="external">Windows版下载地址</a><br><a href="https://mirrors.tuna.tsinghua.edu.cn/CRAN/" target="_blank" rel="external">Linux下载地址</a></p>
-<p>建议Linux用户使用包管理软件下载，Ubuntu和Debian用户在终端输入：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo apt-get install r-project</div></pre></td></tr></table></figure>
-<p>Fedora和Redhat用户在终端输入：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo yum install r-project</div></pre></td></tr></table></figure></p>
-<p>Arch Linux用户在终端输入：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo pacman -S r-project</div></pre></td></tr></table></figure></p>
-<h3 id="启动R"><a href="#启动R" class="headerlink" title="启动R"></a>启动R</h3><p>我们可以在命令行中运行R，比如在Linux或者Mac的终端中输入：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">R</div></pre></td></tr></table></figure></p>
-<p>结果就如图所示：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/R_cli.png" alt="R运行图示"></p>
-<h3 id="寻找合适的IDE"><a href="#寻找合适的IDE" class="headerlink" title="寻找合适的IDE"></a>寻找合适的IDE</h3><p>R安装后默认装了R console，你可以运行R console使用R，但这个IDE很简单，用起来并不会那么顺手。<br><img src="http://7viihf.com1.z0.glb.clouddn.com/Rconsole.png" alt="R console启动后界面"></p>
-<p>所以我们需要找到适合自己的IDE或者其它环境，强烈建议用户使用<a href="https://www.rstudio.com/" target="_blank" rel="external">RStudio</a>,RStudio支持Windows、Mac和Linux系统，其下载地址如下：<br><a href="https://www.rstudio.com/products/rstudio/download/" target="_blank" rel="external">RStudio下载地址</a></p>
-<p>Linux用户应该可以使用包管理软件安装，Windows用户还可以在R环境中使用如下命令安装：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">install.packages(&quot;installr&quot;)   # 下载安装installr包</div><div class="line">library(installr)              # 装在installr包</div><div class="line">install.RStudio()              # 下载并安装RStudio IDE</div></pre></td></tr></table></figure></p>
-<p>RStudid的默认界面如下：</p>
-<p><img src="http://7viihf.com1.z0.glb.clouddn.com/RStudio.png" alt="RStudio启动界面"></p>
-<p>如果你是Emacs<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>用户，你还可以使用Emac+ESS的环境来编辑R程序，另外Sublime Text也有集成的环境。</p>
-<h3 id="初探R"><a href="#初探R" class="headerlink" title="初探R"></a>初探R</h3><blockquote>
-<p>说明：本例所有代码在RStudio中编辑和运行</p>
-</blockquote>
-<p>R一般是通过命令或者程序脚本来操作数据对象，所以它的使用方法和Excel不同。这里简单介绍一下：</p>
-<p><strong>计算数据长度</strong><br><figure class="highlight r"><table><tr><td class="code"><pre><div class="line">&gt; n &lt;- c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)       <span class="comment"># 创建一个向量并命名为n</span></div><div class="line">&gt; length(n)             <span class="comment"># 获取向量的长度</span></div><div class="line">[<span class="number">1</span>] <span class="number">4</span>                   <span class="comment"># 向量的长度为4</span></div></pre></td></tr></table></figure></p>
-<p>这个方式和Excel有很大的不同，Excel需要在表格中输入数据，然后用公式求解。</p>
-<p>我们又分别计算这个向量的平均值、中值以及标准差，R的代码如下：<br><figure class="highlight r"><table><tr><td class="code"><pre><div class="line">&gt; mean(n)               <span class="comment"># 计算向量n的均值</span></div><div class="line">&gt; [<span class="number">1</span>] <span class="number">2.5</span>               <span class="comment"># 计算结果为2.5</span></div><div class="line">&gt; median(n)             <span class="comment"># 计算向量n的中位值</span></div><div class="line">&gt; [<span class="number">1</span>] <span class="number">2.5</span>               <span class="comment"># 计算结果为2.5</span></div><div class="line">&gt; sd(n)                 <span class="comment"># 计算向量n的标准差</span></div><div class="line">&gt; [<span class="number">1</span>] <span class="number">1.290994</span>          <span class="comment"># 计算结果</span></div></pre></td></tr></table></figure></p>
-<p>我们不需要关心n有多少数据，也不需要在R中一定要看到所有数据就能执行计算。</p>
-<p>Excel的处理和运算则如图所示：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/excel.png" alt="Excel处理计算"></p>
-<p>事实上，R支持的更多的数据对象类型，可以使得我们有很多默认的函数来计算需要的值，也可以自己创造函数来计算。</p>
-<p>先说到这，后续更多</p>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">GNU项目是由Richard Stmallman发起的自由开源软件项目，全名是GNU is Not Unix</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Emacs也是GNU项目的成果，你可以在<a href="http://www.gnu.org/software/emacs/emacs.html" target="_blank" rel="external">GNU Emacs主页</a>查看更多信息。</span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+<p>
+读的也挺快，大概一个月时间就读完了，也写了一些笔记（就是本文的雏形），当时想到得读完其它两本书还可以把这个笔记修改下，谁知道这一年过去了，连《致命的自负》这本书我都只是刚刚看完，而最厚的一本书《自由宪章》压根还没开始看，据我所知自由宪章和通往奴役之路关联还挺紧密，很多在《通往奴役之路》之中未能合理解释和回答的问题，在《自由宪章》里有了比较深刻和全面的说明，但不能就这样拖着，先整理下发在blog上，以后慢慢修改，此次的修改主要是删除了涉及政治的部分，毕竟现在的舆论还是少谈政治的好。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">关于这本书</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+大学在学习西方经济学的时候，接触到了凯恩斯，就这样我了解了当年凯恩斯和哈耶克的关于政府是否应该干预经济的争论，从而知道了解了哈耶克这个人。进而了解到哈耶克本人参与的两场大论战，其中一场是哈耶克和米塞斯为一方的，和兰格与勒纳为一方的，就社会主义经济计算可行性的论战。另一场就是和凯恩斯的论战了，而《The Road to Serfdom》正是第一场论战的结果。
+</p>
+
+<p>
+当时知道这回事，但没有读过这本书，去年才买了这本书准备拜读。不过在之前，就知道了这本书的核心内容，而且这本书很早就被翻译成中文，所以我特别不解的就是，在当时的政治环境下怎么会允许这本书翻译出版，甚至被讨论。而且，这本书后来被称为我国社会主义市场经济制度改革的指南，在二十世纪的最后二十年，被中国的经济学家和政治学家拿出来深入的研究和学习。
+</p>
+
+<p>
+后来了解才发现，这本书第一次翻译出版是在1962年，由当时的南开大学校长，著名经济学家腾维藻翻译，并作为“内部读物”在一定阶层的干部群体中发行，所以学生和一般的人是无法获取中文版本的（这本书与1944年出版）。而且是作为批判资本主义经济制度的反面教材的，据说当时的译者序是这么写的：把这本充满毒素的书翻译出来，目的也是想供学术届了解和批判现代资产阶级反动经济理论时作为参考。可是20年后，这本书却被视为改革开放和建设中国特色的社会主义市场经济的圣经。
+</p>
+
+<p>
+而且，这本书的原版在1944年出版后，就成了畅销书。但是被西方的专业经济学家、社会主义者以及左翼人士所批判。美国的民主派《新共和》（是的美国也有社会主义）写了一篇《Poor Hayek》文章斥责为“最重要的反动思想家”。连哈耶克自己都说写完这本书之后，大多数的同行经济学家都不再信任他，他的理论影响下降，许多大学的经济学系也不欢迎他，甚至经济学家认为他是经济学的行外人（结果哈耶克在1974年获得诺贝尔经济学奖）。
+</p>
+</div>
+</div>
+
+<div style="font-size: 14px;padding: 5px;line-height: 20px;border: 1px solid;"><a href="javascript: editAtGithub();" target="_blank" rel="external">Edit Me at Github</a> - <a href="javascript: editAtGithub(true)" target="_blank" rel="external">Org Source</a> - Last Updated 2017-10-27 五 17:38.<br>Render by <a href="https://github.com/CodeFalling/hexo-renderer-org" target="_blank" rel="external">hexo-renderer-org</a> with <a href="http://www.gnu.org/software/emacs/" target="_blank" rel="external">Emacs</a> 25.3.1 (<a href="http://orgmode.org" target="_blank" rel="external">Org</a> mode 8.2.10)</div>
+
       
     </div>
 
@@ -433,11 +449,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/技术/" rel="tag"># 技术</a>
+            <a href="/tags/哈耶克/" rel="tag"># 哈耶克</a>
           
-            <a href="/tags/数据分析/" rel="tag"># 数据分析</a>
+            <a href="/tags/自由主义/" rel="tag"># 自由主义</a>
           
-            <a href="/tags/R/" rel="tag"># R</a>
+            <a href="/tags/经济学/" rel="tag"># 经济学</a>
           
         </div>
       
@@ -450,18 +466,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/23/一个关于风险评测计算的问题/" rel="next" title="一个关于风险评测计算的问题">
-                <i class="fa fa-chevron-left"></i> 一个关于风险评测计算的问题
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/18/使用LaTeX写文档/" rel="prev" title="使用LaTeX写文档">
-                使用LaTeX写文档 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/26/《Python金融大数据分析》读书笔记-1/" rel="prev" title="《Python金融大数据分析》读书笔记-1">
+                《Python金融大数据分析》读书笔记-1 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -620,7 +632,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#导言"><span class="nav-number">1.</span> <span class="nav-text">导言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么是R"><span class="nav-number">2.</span> <span class="nav-text">为什么是R</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R是什么"><span class="nav-number">3.</span> <span class="nav-text">R是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装R"><span class="nav-number">4.</span> <span class="nav-text">安装R</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动R"><span class="nav-number">5.</span> <span class="nav-text">启动R</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寻找合适的IDE"><span class="nav-number">6.</span> <span class="nav-text">寻找合适的IDE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初探R"><span class="nav-number">7.</span> <span class="nav-text">初探R</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sec-1"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sec-2"><span class="nav-number">2.</span> <span class="nav-text">关于这本书</span></a></li></ol></div>
             
 
           </div>
