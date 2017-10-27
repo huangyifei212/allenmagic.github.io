@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="function editAtGithub(isRaw){     var urlparts = document.location.pathname.split(&apos;/&apos;);     var postname = urlparts[urlparts.length - 2];     if(urlparts.length == 3){ // is a page(wiki about etc)">
+<meta name="description" content="写在前面   近期会逐渐的把一些读书笔记整理成文档，一是想把一些东西分享出来，另外就是用写作来调整下状态，欢迎大家拍砖，另外由于笔记是用org格式文档转过来的，可能排版会不是很好看，请原谅！">
 <meta name="keywords" content="金融,Python,数据分析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Python金融大数据分析》读书笔记-1">
 <meta property="og:url" content="http://yoursite.com/2017/10/26/《Python金融大数据分析》读书笔记-1/index.html">
 <meta property="og:site_name" content="Egg's Blog">
-<meta property="og:description" content="function editAtGithub(isRaw){     var urlparts = document.location.pathname.split(&apos;/&apos;);     var postname = urlparts[urlparts.length - 2];     if(urlparts.length == 3){ // is a page(wiki about etc)">
+<meta property="og:description" content="写在前面   近期会逐渐的把一些读书笔记整理成文档，一是想把一些东西分享出来，另外就是用写作来调整下状态，欢迎大家拍砖，另外由于笔记是用org格式文档转过来的，可能排版会不是很好看，请原谅！">
 <meta property="og:image" content="http://7viihf.com1.z0.glb.clouddn.com/emacs-org-mode.png">
 <meta property="og:updated_time" content="2017-10-26T15:44:03.939Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Python金融大数据分析》读书笔记-1">
-<meta name="twitter:description" content="function editAtGithub(isRaw){     var urlparts = document.location.pathname.split(&apos;/&apos;);     var postname = urlparts[urlparts.length - 2];     if(urlparts.length == 3){ // is a page(wiki about etc)">
+<meta name="twitter:description" content="写在前面   近期会逐渐的把一些读书笔记整理成文档，一是想把一些东西分享出来，另外就是用写作来调整下状态，欢迎大家拍砖，另外由于笔记是用org格式文档转过来的，可能排版会不是很好看，请原谅！">
 <meta name="twitter:image" content="http://7viihf.com1.z0.glb.clouddn.com/emacs-org-mode.png">
 
 
@@ -368,23 +368,6 @@
       
         <script src="/assets/js/APlayer.min.js"> </script>
 
-<p>
-<script>
-  function editAtGithub(isRaw){
-    var url<sub>parts</sub> = document.location.pathname.split('/');
-    var postname = url<sub>parts[url</sub><sub>parts</sub>.length - 2];
-    if(url<sub>parts</sub>.length == 3){ // is a page(wiki about etc)
-      postname = postname + '/index.org';
-    }else{
-      postname = '<sub>posts</sub>/' + postname + '.org';
-    }
-    var url = 'https://github.com/CodeFalling/codefalling.com/tree/source/source/' + postname;
-    if(isRaw)
-      url = 'https://raw.githubusercontent.com/CodeFalling/codefalling.com/source/source/' + postname;
-    window.open(url);
-  }
-</script>
-</p>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1">写在前面</h2>
@@ -421,8 +404,8 @@
 </p>
 <blockquote>
 <p>
-<type 'int'="">
-</type></p>
+&lt;type 'int'&gt;
+</p>
 </blockquote>
 
 <p>
@@ -558,7 +541,7 @@ Python的基本数据类型有/元组/、/列表/、/字典/、/集合/。
 
 <div class="org-src-container">
 
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">for value in d.values():</span><br><span class="line">    print(type(value))</span><br><span class="line"></span><br><span class="line">&lt;class 'str'&gt;</span><br><span class="line">&lt;class 'int'&gt;</span><br><span class="line">&lt;class 'str'&gt;</span><br><span class="line">&lt;class 'str'&gt;</span><br><span class="line">&lt;class 'str'&gt;</span><br><span class="line"></span><br><span class="line">for key in d.keys():</span><br><span class="line">    print(key)</span><br><span class="line"></span><br><span class="line">name</span><br><span class="line">age</span><br><span class="line">sex</span><br><span class="line">Country</span><br><span class="line">Title</span><br><span class="line"></span><br><span class="line">for (key, value) in d.items():</span><br><span class="line">    print(key,value)</span><br><span class="line"></span><br><span class="line">name Allen Zheng</span><br><span class="line">age 31</span><br><span class="line">sex male</span><br><span class="line">Country China</span><br><span class="line">Title Senior Product Manager</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">for value in d.values():</span><br><span class="line">    print(type(value))</span><br><span class="line"></span><br><span class="line">&amp;lt;class 'str'&amp;gt;</span><br><span class="line">&amp;lt;class 'int'&amp;gt;</span><br><span class="line">&amp;lt;class 'str'&amp;gt;</span><br><span class="line">&amp;lt;class 'str'&amp;gt;</span><br><span class="line">&amp;lt;class 'str'&amp;gt;</span><br><span class="line"></span><br><span class="line">for key in d.keys():</span><br><span class="line">    print(key)</span><br><span class="line"></span><br><span class="line">name</span><br><span class="line">age</span><br><span class="line">sex</span><br><span class="line">Country</span><br><span class="line">Title</span><br><span class="line"></span><br><span class="line">for (key, value) in d.items():</span><br><span class="line">    print(key,value)</span><br><span class="line"></span><br><span class="line">name Allen Zheng</span><br><span class="line">age 31</span><br><span class="line">sex male</span><br><span class="line">Country China</span><br><span class="line">Title Senior Product Manager</span><br></pre></td></tr></table></figure>
 </div>
 
 <p>
@@ -601,7 +584,7 @@ Python的基本数据类型有/元组/、/列表/、/字典/、/集合/。
 </div>
 </div>
 
-<div style="font-size: 14px;padding: 5px;line-height: 20px;border: 1px solid;"><a href="javascript: editAtGithub();" target="_blank" rel="external">Edit Me at Github</a> - <a href="javascript: editAtGithub(true)" target="_blank" rel="external">Org Source</a> - Last Updated 2017-10-26 四 23:44.<br>Render by <a href="https://github.com/CodeFalling/hexo-renderer-org" target="_blank" rel="external">hexo-renderer-org</a> with <a href="http://www.gnu.org/software/emacs/" target="_blank" rel="external">Emacs</a> 25.3.1 (<a href="http://orgmode.org" target="_blank" rel="external">Org</a> mode 8.2.10)</div>
+<div style="font-size: 14px;padding: 5px;line-height: 20px;border: 1px solid;"><a href="https://github.com/allenmagic" target="_blank" rel="external">Edit Me at Github</a> - <a href="https://allenmagic.github.io/" target="_blank" rel="external">Org Source</a> - Last Updated 2017-10-26 四 23:44.<br>Render by <a href="https://github.com/CodeFalling/hexo-renderer-org" target="_blank" rel="external">hexo-renderer-org</a> with <a href="http://www.gnu.org/software/emacs/" target="_blank" rel="external">Emacs</a> 25.3.1 (<a href="http://orgmode.org" target="_blank" rel="external">Org</a> mode 8.2.10)</div>
 
       
     </div>
@@ -647,10 +630,6 @@ Python的基本数据类型有/元组/、/列表/、/字典/、/集合/。
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/10/27/The-Road-to-Serfdom/" rel="next" title="The Road to Serfdom">
-                <i class="fa fa-chevron-left"></i> The Road to Serfdom
-              </a>
             
           </div>
 
@@ -732,7 +711,7 @@ Python的基本数据类型有/元组/、/列表/、/字典/、/集合/。
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -743,7 +722,7 @@ Python的基本数据类型有/元组/、/列表/、/字典/、/集合/。
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -754,7 +733,7 @@ Python的基本数据类型有/元组/、/列表/、/字典/、/集合/。
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
