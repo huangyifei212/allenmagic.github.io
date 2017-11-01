@@ -1,0 +1,1042 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Niconne:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="金融,Python,数据分析," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="写在前面   近期会逐渐的把一些读书笔记整理成文档，一是想把一些东西分享出来，另外就是用写作来调整下状态，欢迎大家拍砖，另外由于笔记是用org格式文档转过来的，可能排版会不是很好看，请原谅！">
+<meta name="keywords" content="金融,Python,数据分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Python金融大数据分析》读书笔记-1">
+<meta property="og:url" content="http://yoursite.com/2017-10-26-《Python金融大数据分析》读书笔记-1/index.html">
+<meta property="og:site_name" content="Egg's Blog">
+<meta property="og:description" content="写在前面   近期会逐渐的把一些读书笔记整理成文档，一是想把一些东西分享出来，另外就是用写作来调整下状态，欢迎大家拍砖，另外由于笔记是用org格式文档转过来的，可能排版会不是很好看，请原谅！">
+<meta property="og:image" content="http://7viihf.com1.z0.glb.clouddn.com/emacs-org-mode.png">
+<meta property="og:updated_time" content="2017-10-26T15:44:03.939Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《Python金融大数据分析》读书笔记-1">
+<meta name="twitter:description" content="写在前面   近期会逐渐的把一些读书笔记整理成文档，一是想把一些东西分享出来，另外就是用写作来调整下状态，欢迎大家拍砖，另外由于笔记是用org格式文档转过来的，可能排版会不是很好看，请原谅！">
+<meta name="twitter:image" content="http://7viihf.com1.z0.glb.clouddn.com/emacs-org-mode.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索内容","hits_empty":"没有发现任何踪迹: ${query}","hits_stats":"${time} ms 连击 ${hits} 结果"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017-10-26-《Python金融大数据分析》读书笔记-1/"/>
+
+
+
+
+
+  <title> 《Python金融大数据分析》读书笔记-1 | Egg's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Egg's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个傻子</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017-10-26-《Python金融大数据分析》读书笔记-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eggs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Egg's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                《Python金融大数据分析》读书笔记-1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-26T23:00:00+08:00">
+                2017-10-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/量化金融/" itemprop="url" rel="index">
+                    <span itemprop="name">量化金融</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script>
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">写在前面</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+近期会逐渐的把一些读书笔记整理成文档，一是想把一些东西分享出来，另外就是用写作来调整下状态，欢迎大家拍砖，另外由于笔记是用org格式文档转过来的，可能排版会不是很好看，请原谅！
+</p>
+
+<a id="more"></a>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">第四章-数据类型和结构</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">基本数据类型</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+基本数据类型包括整数、浮点数、字符串。因为Python是动态类型的语言，因此在程序运行时可以判断数据的类型，而不需要在使用前实现声明数据类型。
+</p>
+
+<p>
+可以用type函数来返回变量的数据类型：
+</p>
+
+<div class="org-src-container">
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="number">10</span></span><br><span class="line">type(a)</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+返回的结果是int类型的数据：
+</p>
+<blockquote>
+<p>
+&lt;type 'int'&gt;
+</p>
+</blockquote>
+
+<p>
+按照我们的理解，整数和数学意义上的整数一致，并且整数类型是Python标准和内建的数据类型。Python有个特点就是可以处理任意大的整数。
+浮点数一般用来表示小数或者分数，
+</p>
+
+<p>
+对于浮点数，Python提供了*decimal*模块可以提供任意精度的浮点数，并提供了使用这些数值时处理精度问题的多个选项。
+</p>
+
+<div class="org-src-container">
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> decimal</span><br><span class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> Decimal</span><br><span class="line">d=Decimal(<span class="number">1</span>) / Decimal(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+处理完自然数和浮点数，我们来看看文本，Python表示文本的基本数据类型是字符串(string)，并且字符串对象有一些内建方法。
+</p>
+
+<div class="org-src-container">
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t=<span class="string">'this is a test string object'</span></span><br><span class="line">t.capitalize()</span><br><span class="line">t.split()</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+我们会发现Python会返回如下结果：
+</p>
+<blockquote>
+<p>
+This is a test string object
+['this','is','a','test','string','object']
+</p>
+</blockquote>
+
+<p>
+处理字符串对象或者文本时，有个强大的工具就是正则表达式，在Python中的模块为re模块。具体可以参阅相关的数据。
+</p>
+
+
+<div class="org-src-container">
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">series = <span class="string">"""</span><br><span class="line">'01/18/2014 13:00:00',100,'1st';</span><br><span class="line">'01/18/2014 13:30:00',110,'2nd';</span><br><span class="line">'01/18/2014 14:00:00',120,'3rd'</span><br><span class="line">"""</span></span><br><span class="line">dt = re.compile(<span class="string">"'[0-9/:\s]+'"</span>) <span class="comment">#datetime</span></span><br><span class="line"></span><br><span class="line">result = dt.findall(series)</span><br><span class="line"></span><br><span class="line">result</span><br><span class="line">Out[<span class="number">6</span>]: [<span class="string">"'01/18/2014 13:00:00'"</span>, <span class="string">"'01/18/2014 13:30:00'"</span>, <span class="string">"'01/18/2014 14:00:00'"</span>]</span><br></pre></td></tr></table></figure>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2">基本数据结构</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Python的基本数据类型有/元组/、/列表/、/字典/、/集合/。
+</p>
+</div>
+<div id="outline-container-sec-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1">元组</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+元组(tuple)是一种高级数据结构，由多个数据构成的数据集合，其中的数据可以是任何一种数据，并且并不要求元组内的数据基本的类型是一致。
+</p>
+
+<div class="org-src-container">
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t = (<span class="number">1</span>, <span class="number">2.5</span>, <span class="string">'date'</span>, (<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">t</span><br><span class="line">Out[<span class="number">8</span>]: (<span class="number">1</span>, <span class="number">2.5</span>, <span class="string">'date'</span>, (<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">type(t)</span><br><span class="line">Out[<span class="number">9</span>]: tuple</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+在Python中，几乎所有的数据类型结构，都有內建索引，可以自由的引用对应的元素（包括单个元素和多个元素），*这里需要注意的是Python的索引从零开始*。
+</p>
+
+<div class="org-src-container">
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t = (<span class="number">1</span>, <span class="number">2.5</span>, <span class="string">'date'</span>, (<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">t</span><br><span class="line">Out[<span class="number">8</span>]: (<span class="number">1</span>, <span class="number">2.5</span>, <span class="string">'date'</span>, (<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">type(t)</span><br><span class="line">Out[<span class="number">9</span>]: tuple</span><br><span class="line"></span><br><span class="line">t[<span class="number">2</span>]</span><br><span class="line">Out[<span class="number">10</span>]: <span class="string">'date'</span></span><br><span class="line"></span><br><span class="line">t[<span class="number">3</span>]</span><br><span class="line">Out[<span class="number">11</span>]: (<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+元组还有其它的方法可以了解，需要注意的是元组一旦定义，它们是很不容易更改的，所以如果需要更灵活的数据结构，引出了列表。
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2">列表</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+列表(list)相对元组，更加灵活也更强大。而且，列表是金融数据使用的最基本的数据结构。创建方法和元组类似，但是使用[]符号。
+</p>
+
+<div class="org-src-container">
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">l = [<span class="number">1</span>, <span class="number">2.5</span>, <span class="string">'date'</span>, (<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>)]</span><br><span class="line"></span><br><span class="line">l</span><br><span class="line">Out[<span class="number">14</span>]: [<span class="number">1</span>, <span class="number">2.5</span>, <span class="string">'date'</span>, (<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>)]</span><br><span class="line"></span><br><span class="line">l[<span class="number">3</span>]</span><br><span class="line">Out[<span class="number">15</span>]: (<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">l1 = list(t)</span><br><span class="line"></span><br><span class="line">l1</span><br><span class="line">Out[<span class="number">17</span>]: [<span class="number">1</span>, <span class="number">2.5</span>, <span class="string">'date'</span>, (<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>)]</span><br><span class="line"></span><br><span class="line">type(l1)</span><br><span class="line">Out[<span class="number">18</span>]: list</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+我们看到，可以使用[]赋值列表，也可以使用list函数来创建列表，并且列表和元组一样可以方便的索引。
+除了以上的方法，列表还可以通过不同方法来扩大或缩小（增加或者删除列表的元素）。
+</p>
+
+<div class="org-src-container">
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">l.extend(time.localtime())  <span class="comment"># 把时间的每个数据作为元素增加至l列表</span></span><br><span class="line"></span><br><span class="line">l</span><br><span class="line">Out[<span class="number">24</span>]: [<span class="number">1</span>, <span class="number">2.5</span>, <span class="string">'date'</span>, (<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>), <span class="number">2017</span>, <span class="number">10</span>, <span class="number">26</span>, <span class="number">21</span>, <span class="number">48</span>, <span class="number">12</span>, <span class="number">3</span>, <span class="number">299</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">l.remove(<span class="number">2.5</span>)  <span class="comment"># 移除值为2.5的元素</span></span><br><span class="line"></span><br><span class="line">l</span><br><span class="line">Out[<span class="number">26</span>]: [<span class="number">1</span>, <span class="string">'date'</span>, (<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>), <span class="number">2017</span>, <span class="number">10</span>, <span class="number">26</span>, <span class="number">21</span>, <span class="number">48</span>, <span class="number">12</span>, <span class="number">3</span>, <span class="number">299</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">l.pop(<span class="number">0</span>)  <span class="comment"># 移除索引为0的元素</span></span><br><span class="line">Out[<span class="number">27</span>]: <span class="number">1</span></span><br><span class="line"></span><br><span class="line">l</span><br><span class="line">Out[<span class="number">28</span>]: [<span class="string">'date'</span>, (<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>), <span class="number">2017</span>, <span class="number">10</span>, <span class="number">26</span>, <span class="number">21</span>, <span class="number">48</span>, <span class="number">12</span>, <span class="number">3</span>, <span class="number">299</span>, <span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+以上就是列表的简单介绍，列表还有其它的方法，可以参考相关的书记和手册，这里就不再赘述了。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-3" class="outline-4">
+<h4 id="sec-2-2-3">字典</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<p>
+字典(dict)对象就是按照键码（可能是字符串对象）读取的数据字典，也是一种可变序列（上面所说的元组是不可变序列，列表是可变序列），是按照key:value的方式进行存储数据，需要说明的是列表是有序的而且可以排序，但字典对象是无序且不可排序的，字典可以用{}定义。
+</p>
+
+<div class="org-src-container">
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d = {</span><br><span class="line">     <span class="string">'name'</span> : <span class="string">"Allen Zheng"</span>,</span><br><span class="line">     <span class="string">'age'</span> : <span class="number">31</span>,</span><br><span class="line">     <span class="string">'sex'</span> : <span class="string">"male"</span>,</span><br><span class="line">     <span class="string">'Country'</span> : <span class="string">"China"</span>,</span><br><span class="line">     <span class="string">'Title'</span> : <span class="string">"Senior Product Manager"</span></span><br><span class="line">     }</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> type(d)</span><br><span class="line">Out[<span class="number">30</span>]: dict</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+同样，字典对象也內建了一些方法，比如索引等等：
+</p>
+
+<div class="org-src-container">
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">n [<span class="number">31</span>]: d.keys()</span><br><span class="line">Out[<span class="number">31</span>]: dict_keys([<span class="string">'name'</span>, <span class="string">'age'</span>, <span class="string">'sex'</span>, <span class="string">'Country'</span>, <span class="string">'Title'</span>])</span><br><span class="line"></span><br><span class="line">d.values()</span><br><span class="line">Out[<span class="number">32</span>]: dict_values([<span class="string">'Allen Zheng'</span>, <span class="number">31</span>, <span class="string">'male'</span>, <span class="string">'China'</span>, <span class="string">'Senior Product Manager'</span>])</span><br><span class="line"></span><br><span class="line">print(d[<span class="string">'age'</span>], d[<span class="string">'Title'</span>])</span><br><span class="line"><span class="number">31</span> Senior Product Manager</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+字典支持for遍历的循环，事实上元组和列表也支持for遍历循环：
+</p>
+
+<div class="org-src-container">
+
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">for value in d.values():</span><br><span class="line">    print(type(value))</span><br><span class="line"></span><br><span class="line">&amp;lt;class 'str'&amp;gt;</span><br><span class="line">&amp;lt;class 'int'&amp;gt;</span><br><span class="line">&amp;lt;class 'str'&amp;gt;</span><br><span class="line">&amp;lt;class 'str'&amp;gt;</span><br><span class="line">&amp;lt;class 'str'&amp;gt;</span><br><span class="line"></span><br><span class="line">for key in d.keys():</span><br><span class="line">    print(key)</span><br><span class="line"></span><br><span class="line">name</span><br><span class="line">age</span><br><span class="line">sex</span><br><span class="line">Country</span><br><span class="line">Title</span><br><span class="line"></span><br><span class="line">for (key, value) in d.items():</span><br><span class="line">    print(key,value)</span><br><span class="line"></span><br><span class="line">name Allen Zheng</span><br><span class="line">age 31</span><br><span class="line">sex male</span><br><span class="line">Country China</span><br><span class="line">Title Senior Product Manager</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+更多字典的方法和介绍可以参考相关的书籍或者文档。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-4" class="outline-4">
+<h4 id="sec-2-2-4">集合</h4>
+<div class="outline-text-4" id="text-2-2-4">
+<p>
+集合是Python中使用较少的一种数据结构，集合是其它对象的*无序*集合，每个元素只包含一次。
+</p>
+
+<div class="org-src-container">
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t = (<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'f'</span>,<span class="string">'d'</span>,<span class="string">'a'</span>,<span class="string">'m'</span>,<span class="string">'b'</span>)</span><br><span class="line"></span><br><span class="line">T = set(t)</span><br><span class="line"></span><br><span class="line">T</span><br><span class="line">Out[<span class="number">44</span>]: {<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'d'</span>, <span class="string">'f'</span>, <span class="string">'m'</span>}</span><br><span class="line"></span><br><span class="line">l = [<span class="number">1</span>,<span class="number">5</span>,<span class="string">'a'</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="string">'b'</span>,<span class="string">'a'</span>]</span><br><span class="line"></span><br><span class="line">L = set(l)</span><br><span class="line"></span><br><span class="line">L</span><br><span class="line">Out[<span class="number">47</span>]: {<span class="number">1</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="string">'a'</span>, <span class="string">'b'</span>}</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+使用集合对象，可以实现数学上的集合论相关的运算，比如生成并集、交集和差集等。另外，集合有个用处就是去除列表的重复元素。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3">后续</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+下一篇笔记会介绍NumPy的数据结构，NumPy是用于金融数据分析的基石，会花更多的篇幅来说明。
+另外，最近由于厌倦了工作中的时间管理、项目管理、文档管理和任务管理用不同的软件工具，实在是烦躁。于是重新拿起了荒废许久Emacs，把遗弃已久的org-mod重新拾起来做日常管理。研究了两天，逐渐上手就深深迷恋爱不释手。这里就放个截图给大家看看。
+</p>
+<p>
+<img src="http://7viihf.com1.z0.glb.clouddn.com/emacs-org-mode.png" alt="emacs-org-mode.png">
+有空可以介绍一下Emacs和org-mode，简直是写作和日常管理的神器。
+</p>
+</div>
+</div>
+</div>
+
+<div style="font-size: 14px;padding: 5px;line-height: 20px;border: 1px solid;"><a href="https://github.com/allenmagic" target="_blank" rel="external">Edit Me at Github</a> - <a href="https://allenmagic.github.io/" target="_blank" rel="external">Org Source</a> - Last Updated 2017-10-26 四 23:44.<br>Render by <a href="https://github.com/CodeFalling/hexo-renderer-org" target="_blank" rel="external">hexo-renderer-org</a> with <a href="http://www.gnu.org/software/emacs/" target="_blank" rel="external">Emacs</a> 25.3.1 (<a href="http://orgmode.org" target="_blank" rel="external">Org</a> mode 8.2.10)</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/金融/" rel="tag"><i class="fa fa-tag"></i> 金融</a>
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+            <a href="/tags/数据分析/" rel="tag"><i class="fa fa-tag"></i> 数据分析</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017-10-29-过去和未来/" rel="next" title="过去和未来">
+                <i class="fa fa-chevron-left"></i> 过去和未来
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017-10-25-生命的精彩来自内心的丰富/" rel="prev" title="生命的精彩来自内心的丰富">
+                生命的精彩来自内心的丰富 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Eggs" />
+          <p class="site-author-name" itemprop="name">Eggs</p>
+           
+              <p class="site-description motion-element" itemprop="description">一个爱思考爱学习的傻子</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/allenmagic" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zyx1986" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/a90ae112a3ae" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-lemon-o"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sec-1"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sec-2"><span class="nav-number">2.</span> <span class="nav-text">第四章-数据类型和结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sec-2-1"><span class="nav-number">2.1.</span> <span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sec-2-2"><span class="nav-number">2.2.</span> <span class="nav-text">基本数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sec-2-2-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">元组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sec-2-2-2"><span class="nav-number">2.2.2.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sec-2-2-3"><span class="nav-number">2.2.3.</span> <span class="nav-text">字典</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sec-2-2-4"><span class="nav-number">2.2.4.</span> <span class="nav-text">集合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sec-2-3"><span class="nav-number">2.3.</span> <span class="nav-text">后续</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-space-shuttle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eggs的博客</span>
+</div>
+
+
+<div class="powered-by">
+  由  Eggs创建
+</div>
+
+<div class="theme-info">
+  不折腾会死 - 想学啊，我教你呀!
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,897 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Niconne:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="金融,Python,数据可视化,ECharts," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="导言 之前写过一篇文章，介绍用python从网易财经抓取数据并使用matplotlib和R画出K线图。上述方法尤其适用的场景，有时候在交互式绘图方面显得力不从心，今天介绍以下基于ECharts进行交互绘图，并且我们将数据的获取方式进行更新，使用TuShare这个开源的财经数据接口获取需要的数据。">
+<meta name="keywords" content="金融,Python,数据可视化,ECharts">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于TuShare和ECharts的金融数据可视化">
+<meta property="og:url" content="http://yoursite.com/2017-10-19-基于tushare和ECharts的金融数据可视化/index.html">
+<meta property="og:site_name" content="Egg's Blog">
+<meta property="og:description" content="导言 之前写过一篇文章，介绍用python从网易财经抓取数据并使用matplotlib和R画出K线图。上述方法尤其适用的场景，有时候在交互式绘图方面显得力不从心，今天介绍以下基于ECharts进行交互绘图，并且我们将数据的获取方式进行更新，使用TuShare这个开源的财经数据接口获取需要的数据。">
+<meta property="og:updated_time" content="2017-10-26T10:11:51.179Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于TuShare和ECharts的金融数据可视化">
+<meta name="twitter:description" content="导言 之前写过一篇文章，介绍用python从网易财经抓取数据并使用matplotlib和R画出K线图。上述方法尤其适用的场景，有时候在交互式绘图方面显得力不从心，今天介绍以下基于ECharts进行交互绘图，并且我们将数据的获取方式进行更新，使用TuShare这个开源的财经数据接口获取需要的数据。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索内容","hits_empty":"没有发现任何踪迹: ${query}","hits_stats":"${time} ms 连击 ${hits} 结果"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017-10-19-基于tushare和ECharts的金融数据可视化/"/>
+
+
+
+
+
+  <title> 基于TuShare和ECharts的金融数据可视化 | Egg's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Egg's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个傻子</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017-10-19-基于tushare和ECharts的金融数据可视化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eggs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Egg's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                基于TuShare和ECharts的金融数据可视化
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-19T14:00:32+08:00">
+                2017-10-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据分析/" itemprop="url" rel="index">
+                    <span itemprop="name">数据分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><blockquote>
+<p>之前写过一篇文章，介绍用python从网易财经抓取数据并使用matplotlib和R画出K线图。上述方法尤其适用的场景，有时候在交互式绘图方面显得力不从心，今天介绍以下基于ECharts进行交互绘图，并且我们将数据的获取方式进行更新，使用TuShare这个开源的财经数据接口获取需要的数据。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>首先介绍下TuShare和ECharts两个有用的工具。</p>
+<h3 id="TuShare"><a href="#TuShare" class="headerlink" title="TuShare"></a>TuShare</h3><p>TuShare<a href="http://www.waditu.cn/" target="_blank" rel="external">点击这里访问</a>是一个由个人开发和维护的开源财经数据接口包，其中的数据包括股票的历史行情、实时行情数据、分类数据、财务数据和基本面的数据等，数据均是从第三方取到获取并包装，使用python对数据进行清洗和处理，最终的数据格式为Pandas中支持的data.frame格式的数据。</p>
+<p>如TuShare本身介绍所述，该数据接口适用于量化投资分析师（Quant)、对金融市场进行大数据分析的企业和个人、金融公司以及学习利用python进行数据分析的人（包括学生）。所以如果你对金融分析感兴趣，而又不想付费使用商业的数据接口，Tushare是一个非常不错的选择，如果你觉得这个接口很好用，并且愿意适当支持作者，你也可以在Tushare的主页进行捐助.</p>
+<h3 id="ECharts"><a href="#ECharts" class="headerlink" title="ECharts"></a>ECharts</h3><p>ECharts是一个纯粹的JavaScript库，由百度开发和维护的一个<a href="http://echarts.baidu.com/index.html" target="_blank" rel="external">开源项目</a>。这个百度的产品确实很赞，你可以在官网查看实例，并且可以修改实例来体验产品，可以发现基本上主流的图形都可以支持，而且由于文档有中文版，适合对英语阅读有困难的朋友。</p>
+<p>另外，hexo其实是支持echarts模块的，其插件为<a href="https://github.com/quentin-chen/hexo-tag-echarts3" target="_blank" rel="external">hexo-tag-echarts3</a>，并且你可以参考<a href="http://kchen.cc/2016/11/05/echarts-in-hexo/" target="_blank" rel="external">使用方法</a>，对于此本文就不再展开说明了。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="安装TuShare"><a href="#安装TuShare" class="headerlink" title="安装TuShare"></a>安装TuShare</h3><p>TuShare的安装很简单，可以在网站查看其的系统依赖，一般Python是最新版的都支持（包括Python2和Python3）。另外，因为tushare的数据格式为data.frame，因此要求python安装了Pandas库。使用命令安装如下：</p>
+<p>以Mac OS为准，Linux和Windows参考网站的提示方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">pip install tushare   # Python2安装</div><div class="line">pip3 install tushare  # Python3安装</div><div class="line"></div><div class="line"># 如果安装报错，一般是没有安装Pandas，可以如下安装：</div><div class="line">pip install pandas     # Python2安装</div><div class="line">pip3 install pandas    # Python3安装</div></pre></td></tr></table></figure>
+<p>安装完就可以使用TuShare了。</p>
+<h3 id="安装ECharts"><a href="#安装ECharts" class="headerlink" title="安装ECharts"></a>安装ECharts</h3><p>实际上ECharts可以下载到本地，并可以和你的web或者app程序打包应用，我们这次使用的ECharts不是使用本地调用代码，而是使用Python的一个模块，其中动态导入js脚本实现绘图。因此本次不用安装ECharts。</p>
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>在Python的Ipython中，有个display的模块，可以实现HTML效果的展示，更出彩的是Ipython Notebook中自带JS模块可以动态导入js脚本并执行。可以先看看示例（本文的示例均是使用Ipython)：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="keyword">from</span> Ipython.display <span class="keyword">import</span> HTML</div><div class="line"></div><div class="line">HTML(<span class="string">'这是&lt;font color=\'read\'&gt;HTML代码&lt;/font&gt;测试代码'</span>)</div></pre></td></tr></table></figure>
+<h3 id="ECharts的基本用法"><a href="#ECharts的基本用法" class="headerlink" title="ECharts的基本用法"></a>ECharts的基本用法</h3><p>ECharts是个纯粹的JS图形库，所以其语言本质是Javascript语言。根据官网的示例，我们构建以下一个图形：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">option = &#123;</div><div class="line">    <span class="attr">title</span> : &#123;</div><div class="line">        <span class="attr">text</span>: <span class="string">'各金融资产比重'</span>,</div><div class="line">        <span class="attr">subtext</span>: <span class="string">'纯属虚构'</span>,</div><div class="line">        <span class="attr">x</span>:<span class="string">'center'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">tooltip</span> : &#123;</div><div class="line">        <span class="attr">trigger</span>: <span class="string">'item'</span>,</div><div class="line">        <span class="attr">formatter</span>: <span class="string">"&#123;a&#125; &lt;br/&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)"</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">legend</span>: &#123;</div><div class="line">        <span class="attr">orient</span>: <span class="string">'vertical'</span>,</div><div class="line">        <span class="attr">left</span>: <span class="string">'left'</span>,</div><div class="line">        <span class="attr">data</span>: [<span class="string">'股票'</span>,<span class="string">'债券'</span>,<span class="string">'基金'</span>,<span class="string">'金融衍生品'</span>,<span class="string">'现金及等价物'</span>]</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">series</span> : [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">name</span>: <span class="string">'金融资产'</span>,</div><div class="line">            <span class="attr">type</span>: <span class="string">'pie'</span>,</div><div class="line">            <span class="attr">radius</span> : <span class="string">'55%'</span>,</div><div class="line">            <span class="attr">center</span>: [<span class="string">'50%'</span>, <span class="string">'60%'</span>],</div><div class="line">            <span class="attr">data</span>:[</div><div class="line">                &#123;<span class="attr">value</span>:<span class="number">335</span>, <span class="attr">name</span>:<span class="string">'债券'</span>&#125;,</div><div class="line">                &#123;<span class="attr">value</span>:<span class="number">310</span>, <span class="attr">name</span>:<span class="string">'基金'</span>&#125;,</div><div class="line">                &#123;<span class="attr">value</span>:<span class="number">234</span>, <span class="attr">name</span>:<span class="string">'现金及等价物'</span>&#125;,</div><div class="line">                &#123;<span class="attr">value</span>:<span class="number">135</span>, <span class="attr">name</span>:<span class="string">'金融衍生品'</span>&#125;,</div><div class="line">                &#123;<span class="attr">value</span>:<span class="number">1548</span>, <span class="attr">name</span>:<span class="string">'股票'</span>&#125;</div><div class="line">            ],</div><div class="line">            <span class="attr">itemStyle</span>: &#123;</div><div class="line">                <span class="attr">emphasis</span>: &#123;</div><div class="line">                    <span class="attr">shadowBlur</span>: <span class="number">10</span>,</div><div class="line">                    <span class="attr">shadowOffsetX</span>: <span class="number">0</span>,</div><div class="line">                    <span class="attr">shadowColor</span>: <span class="string">'rgba(0, 0, 0, 0.5)'</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>对应的图形就如下所示，并且图形可以交互显示:</p>
+<div id="echarts7483" style="width: 110%;height: 420px;margin: 0 auto"></div>
+<script src="http://echarts.baidu.com/dist/echarts.common.min.js"></script>
+
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts7483'));
+        // 指定图表的配置项和数据
+        var option = option = {
+    title : {
+        text: '各金融资产比重',
+        subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: ['股票','债券','基金','金融衍生品','现金及等价物']
+    },
+    series : [
+        {
+            name: '金融资产',
+            type: 'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data: [
+                {value:335, name:'债券'},
+                {value:310, name:'基金'},
+                {value:234, name:'现金及等价物'},
+                {value:135, name:'金融衍生品'},
+                {value:1548, name:'股票'}
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+<p>所以我们看到，ECharts基于javascript绘制图形，定义好图形的参数和数据，用浏览器渲染就能得到所需要的图形，我们本文就使用了TuShare获取数据，并对数据进行清洗和处理。</p>
+<h3 id="TuShare的基本用法"><a href="#TuShare的基本用法" class="headerlink" title="TuShare的基本用法"></a>TuShare的基本用法</h3><p>安装TuShare后可以直接使用，tushare有各种接口返回不同的数据，非常容易操作，例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> tushare <span class="keyword">as</span> ts</div><div class="line"></div><div class="line">price_by_day = ts.get_k_data(code=<span class="string">'600000'</span>, ktype=<span class="string">'D'</span>, autype=<span class="string">'None'</span>, start=<span class="string">'2017-01-01'</span>, end=<span class="string">'2017-10-19'</span>)</div><div class="line">price_by_day[<span class="number">0</span>:<span class="number">10</span>]</div><div class="line"></div><div class="line"><span class="comment"># 运行结果如下：</span></div><div class="line">Out[<span class="number">5</span>]:</div><div class="line">         date   open  close   high    low    volume    code</div><div class="line"><span class="number">0</span>  <span class="number">2017</span><span class="number">-01</span><span class="number">-03</span>  <span class="number">16.21</span>  <span class="number">16.30</span>  <span class="number">16.44</span>  <span class="number">16.17</span>  <span class="number">162371.0</span>  <span class="number">600000</span></div><div class="line"><span class="number">1</span>  <span class="number">2017</span><span class="number">-01</span><span class="number">-04</span>  <span class="number">16.29</span>  <span class="number">16.33</span>  <span class="number">16.35</span>  <span class="number">16.18</span>  <span class="number">296587.0</span>  <span class="number">600000</span></div><div class="line"><span class="number">2</span>  <span class="number">2017</span><span class="number">-01</span><span class="number">-05</span>  <span class="number">16.30</span>  <span class="number">16.30</span>  <span class="number">16.38</span>  <span class="number">16.24</span>  <span class="number">264376.0</span>  <span class="number">600000</span></div><div class="line"><span class="number">3</span>  <span class="number">2017</span><span class="number">-01</span><span class="number">-06</span>  <span class="number">16.30</span>  <span class="number">16.18</span>  <span class="number">16.30</span>  <span class="number">16.13</span>  <span class="number">171955.0</span>  <span class="number">600000</span></div><div class="line"><span class="number">4</span>  <span class="number">2017</span><span class="number">-01</span><span class="number">-09</span>  <span class="number">16.24</span>  <span class="number">16.20</span>  <span class="number">16.29</span>  <span class="number">16.13</span>  <span class="number">149087.0</span>  <span class="number">600000</span></div><div class="line"><span class="number">5</span>  <span class="number">2017</span><span class="number">-01</span><span class="number">-10</span>  <span class="number">16.18</span>  <span class="number">16.19</span>  <span class="number">16.24</span>  <span class="number">16.14</span>   <span class="number">79967.0</span>  <span class="number">600000</span></div><div class="line"><span class="number">6</span>  <span class="number">2017</span><span class="number">-01</span><span class="number">-11</span>  <span class="number">16.24</span>  <span class="number">16.16</span>  <span class="number">16.24</span>  <span class="number">16.15</span>   <span class="number">91933.0</span>  <span class="number">600000</span></div><div class="line"><span class="number">7</span>  <span class="number">2017</span><span class="number">-01</span><span class="number">-12</span>  <span class="number">16.18</span>  <span class="number">16.12</span>  <span class="number">16.20</span>  <span class="number">16.11</span>   <span class="number">82961.0</span>  <span class="number">600000</span></div><div class="line"><span class="number">8</span>  <span class="number">2017</span><span class="number">-01</span><span class="number">-13</span>  <span class="number">16.10</span>  <span class="number">16.27</span>  <span class="number">16.29</span>  <span class="number">16.10</span>  <span class="number">190341.0</span>  <span class="number">600000</span></div><div class="line"><span class="number">9</span>  <span class="number">2017</span><span class="number">-01</span><span class="number">-16</span>  <span class="number">16.23</span>  <span class="number">16.56</span>  <span class="number">16.60</span>  <span class="number">16.10</span>  <span class="number">533047.0</span>  <span class="number">600000</span></div></pre></td></tr></table></figure>
+<p>示例中，我们使用了ts中的get_k_data方法，获取了股票代码为600000（浦发银行）的历史日数据，同样我们还可以使用其它接口获取其它的数据，甚至包括分时数据。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="股票的日K线图"><a href="#股票的日K线图" class="headerlink" title="股票的日K线图"></a>股票的日K线图</h3><p>根据以上我们的想法，首先</p>
+<p><strong>未完成，待续</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/金融/" rel="tag"><i class="fa fa-tag"></i> 金融</a>
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+            <a href="/tags/数据可视化/" rel="tag"><i class="fa fa-tag"></i> 数据可视化</a>
+          
+            <a href="/tags/ECharts/" rel="tag"><i class="fa fa-tag"></i> ECharts</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017-10-25-生命的精彩来自内心的丰富/" rel="next" title="生命的精彩来自内心的丰富">
+                <i class="fa fa-chevron-left"></i> 生命的精彩来自内心的丰富
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017-08-26-LaTeX字体设置技巧/" rel="prev" title="LaTeX字体设置技巧">
+                LaTeX字体设置技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Eggs" />
+          <p class="site-author-name" itemprop="name">Eggs</p>
+           
+              <p class="site-description motion-element" itemprop="description">一个爱思考爱学习的傻子</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/allenmagic" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zyx1986" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/a90ae112a3ae" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-lemon-o"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导言"><span class="nav-number">1.</span> <span class="nav-text">导言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TuShare"><span class="nav-number">2.1.</span> <span class="nav-text">TuShare</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ECharts"><span class="nav-number">2.2.</span> <span class="nav-text">ECharts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装TuShare"><span class="nav-number">3.1.</span> <span class="nav-text">安装TuShare</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装ECharts"><span class="nav-number">3.2.</span> <span class="nav-text">安装ECharts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现原理"><span class="nav-number">4.</span> <span class="nav-text">实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ECharts的基本用法"><span class="nav-number">4.1.</span> <span class="nav-text">ECharts的基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TuShare的基本用法"><span class="nav-number">4.2.</span> <span class="nav-text">TuShare的基本用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">5.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#股票的日K线图"><span class="nav-number">5.1.</span> <span class="nav-text">股票的日K线图</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-space-shuttle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eggs的博客</span>
+</div>
+
+
+<div class="powered-by">
+  由  Eggs创建
+</div>
+
+<div class="theme-info">
+  不折腾会死 - 想学啊，我教你呀!
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

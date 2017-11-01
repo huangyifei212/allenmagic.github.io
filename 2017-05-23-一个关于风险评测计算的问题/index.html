@@ -1,0 +1,934 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Niconne:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python,技术,数据分析,R," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言近几天，在做一个工作相关的内容，就是对企业投资者进行风险评测。我设计了若干个问题，并根据投资者的选项用于评分，但需要提前计算多少种选项的可能性，并计算分数的分布。并根据分数确定相应的分数区间对应的风险等级。">
+<meta name="keywords" content="Python,技术,数据分析,R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个关于风险评测计算的问题">
+<meta property="og:url" content="http://yoursite.com/2017-05-23-一个关于风险评测计算的问题/index.html">
+<meta property="og:site_name" content="Egg's Blog">
+<meta property="og:description" content="前言近几天，在做一个工作相关的内容，就是对企业投资者进行风险评测。我设计了若干个问题，并根据投资者的选项用于评分，但需要提前计算多少种选项的可能性，并计算分数的分布。并根据分数确定相应的分数区间对应的风险等级。">
+<meta property="og:image" content="http://7viihf.com1.z0.glb.clouddn.com/cdfofscore.png">
+<meta property="og:image" content="http://7viihf.com1.z0.glb.clouddn.com/uscore.png">
+<meta property="og:image" content="http://7viihf.com1.z0.glb.clouddn.com/density.png">
+<meta property="og:updated_time" content="2017-05-23T08:02:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个关于风险评测计算的问题">
+<meta name="twitter:description" content="前言近几天，在做一个工作相关的内容，就是对企业投资者进行风险评测。我设计了若干个问题，并根据投资者的选项用于评分，但需要提前计算多少种选项的可能性，并计算分数的分布。并根据分数确定相应的分数区间对应的风险等级。">
+<meta name="twitter:image" content="http://7viihf.com1.z0.glb.clouddn.com/cdfofscore.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索内容","hits_empty":"没有发现任何踪迹: ${query}","hits_stats":"${time} ms 连击 ${hits} 结果"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017-05-23-一个关于风险评测计算的问题/"/>
+
+
+
+
+
+  <title> 一个关于风险评测计算的问题 | Egg's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Egg's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个傻子</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017-05-23-一个关于风险评测计算的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eggs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Egg's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                一个关于风险评测计算的问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T09:14:33+08:00">
+                2017-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据分析/" itemprop="url" rel="index">
+                    <span itemprop="name">数据分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>近几天，在做一个工作相关的内容，就是对企业投资者进行风险评测。我设计了若干个问题，并根据投资者的选项用于评分，但需要提前计算多少种选项的可能性，并计算分数的分布。并根据分数确定相应的分数区间对应的风险等级。</p>
+<a id="more"></a>
+<p>这听上去是个简单的问题，但实际上计算起来颇为复杂，想了不少办法才实现。这里也记录下来，并写成分享的文章可以让大家看一下，说不定可以借鉴。</p>
+<p>本次计算主要是使用Python和R。</p>
+<p>由于代码比较简单，就不用同步到Github，所有代码在文章里都能获取到。</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>其实这次的问题很简单:</p>
+<ol>
+<li>有6个风险评测的问题</li>
+<li>每个问题有A、B、C三个选项</li>
+<li>每个问题的分值比重不一样</li>
+<li>每个选项的分数不一样</li>
+<li>需要根据投资者的选择答案计算其最终得分</li>
+<li>根据其得分给出风险等级</li>
+</ol>
+<p>但我们要根据所有可能的选择结果确定分数范围，并根据分数范围确定其对应的风险等级。所以问题的计算逻辑就如下了：</p>
+<ol>
+<li>获取所有的选择答案的组合结果</li>
+<li>根据组合计算每一个结果的分数</li>
+<li>根据所有分数确定分数区间和风险等级的对应关系</li>
+<li>计算投资者的分数</li>
+<li>确定投资者的风险等级</li>
+</ol>
+<h3 id="获取所有组合"><a href="#获取所有组合" class="headerlink" title="获取所有组合"></a>获取所有组合</h3><p>我们假设有A、B、C三个选项，对应的分数分别为[25,50,75]:<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[A, B, C] = [25, 50, 75]</div></pre></td></tr></table></figure></p>
+<p>总共有6道题，每道题有三个选项，所以答案的组合总共有$3^6=729$个，那么分数的可能性就有729个（实际上应该小于729，因为有不同答案但相同分数）。</p>
+<p>我们不需要获取ABC的答案组合，只需要获得分数[25, 50, 75]的组合即可，所以我思考了不超过10s，就放弃了使用Excel，因为这么多年早忘了当初那丁点的VBA知识了，而这个要用Excel计算的话必须使用VBA，所以果断放弃。</p>
+<p>那么再思考下要怎么计算，我们知道有6个答案，每个答案的分数是[25, 50, 75]中的一个，然后组成一个组合。所以其答案可能是:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[A, A, B, B, C, A] = [25, 25, 50, 50, 75, 25]</div></pre></td></tr></table></figure>
+<p>这样的组合总共有729个，所以要获取所有可能的结果，那么可以使用Python的itertools包中的product就是笛卡尔积来计算所有的可能组合：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> itertools</div><div class="line"></div><div class="line">s = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.product([<span class="number">25</span>,<span class="number">50</span>,<span class="number">75</span>], repeat =<span class="number">6</span> ):</div><div class="line">	s.extend([i])</div></pre></td></tr></table></figure>
+<p>s就是所有的答案分数的组合可能，我们查看下组合的数量：<br><figure class="highlight python"><table><tr><td class="code"><pre><div class="line">print(len(s))</div><div class="line"><span class="number">729</span></div><div class="line">[Finished <span class="keyword">in</span> <span class="number">0.1</span>s]</div></pre></td></tr></table></figure></p>
+<h3 id="如何计算？"><a href="#如何计算？" class="headerlink" title="如何计算？"></a>如何计算？</h3><p>我们已经知道了，每个答案组合有对应的分数，以上面的组合为例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[A, A, B, B, C, A] = [25, 25, 50, 50, 75, 25]</div></pre></td></tr></table></figure>
+<p>计算其分值为：250(随机的分数都能是这个值我服了)。</p>
+<p>但我们不能这样简单的计算分值，因为每个问题的分值权重是不一样的，每个问题的重要程度是不一样的，我们预先定义每个问题权重为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[1, 2, 3, 4, 5, 6] = [20%, 20%, 20%, 20%, 10%, 10%]</div></pre></td></tr></table></figure>
+<p>所以每个投资者的分数计算公式为：</p>
+<p>$$Score = \sum_{i}^{n=6}score_i \times W_i$$</p>
+<p>$score_{i}$即是答案的分值组合，$W_i$为每个答案分值的权重,重新计算的分数结果就是40分。</p>
+<p>如果答案组合只有一两个，那么这样计算也就罢了，但我们有729个组合，不可能每个计算出来，至少我们的组合的获取就是要通过工具得出来。怎么计算所有729个组合分数呢，而且当选项扩展至4个甚至5个，问题扩展至数十个，那么答案组合就更多了，怎么办呢？</p>
+<h3 id="复习下矩阵计算"><a href="#复习下矩阵计算" class="headerlink" title="复习下矩阵计算"></a>复习下矩阵计算</h3><p>在6个问题3个答案的情况有729个组合，每个组合是有6个分数组成，每个分数有对应的权重，我们想到这样一个公式，$A_{m \times n}$ $\times$ $B_{n \times k}$ = $C_{m \times k}$:</p>
+<p>$$<br>\begin{equation}<br>\begin{bmatrix}<br>   1 &amp; 2 \\<br>   3 &amp; 4<br>\end{bmatrix}<br>\times<br>\begin{bmatrix}<br>   1 \\<br>   2<br>\end{bmatrix}<br>=<br>\begin{bmatrix}<br>   5 \\<br>   11<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
+<p>这是线性代数中所学习的矩阵乘法，那么我们就可以认为，729个组合每个组合为6个分数，所以可以看成一个$729 \times 6$的矩阵$A_{729 \times 6}$，那么权重则是一个$6 \times 1$的矩阵$B_{6 \times 1}$，所有两个矩阵相乘则生成一个矩阵$C_{729 \times 1}$。</p>
+<p>那么计算的整个公式就是：</p>
+<p>$$<br>\begin{equation}<br>\begin{bmatrix}<br>   a_{11} &amp; a_{12} &amp; a_{13} &amp; \cdots &amp; a_{16} \\<br>   a_{21} &amp; a_{22} &amp; a_{23} &amp; \cdots &amp; a_{26} \\<br>   \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>   a_{i1} &amp; a_{i2} &amp; a_{i3} &amp; \cdots &amp; a_{ij}<br>\end{bmatrix}<br>\times<br>\begin{bmatrix}<br>b_{11} \\<br>b_{21} \\<br>\vdots \\<br>b_{61}<br>\end{bmatrix}<br>=<br>\begin{bmatrix}<br>c_{11} \\<br>c_{21} \\<br>\vdots \\<br>c_{i1}<br>\end{bmatrix}<br>\end{equation}<br>$$<br>特别的，$(i, j) = (729, 6)$。</p>
+<h3 id="Python计算逻辑和代码"><a href="#Python计算逻辑和代码" class="headerlink" title="Python计算逻辑和代码"></a>Python计算逻辑和代码</h3><p>我们考虑整个计算的顺序和逻辑如下：</p>
+<ol>
+<li>获取所有分数组合</li>
+<li>将分数组合生成为矩阵</li>
+<li>构建权重的矩阵</li>
+<li>分别两个矩阵相乘</li>
+<li>得到所有分数</li>
+<li>用R做分数的图形分布</li>
+<li>根据分布确定不同风险等级的分位数</li>
+</ol>
+<p>我们考虑每一个步骤的代码：</p>
+<ol>
+<li>获取所有分数组合</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> itertools</div><div class="line"></div><div class="line">s = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.product([<span class="number">25</span>,<span class="number">50</span>,<span class="number">75</span>], repeat =<span class="number">6</span> ):</div><div class="line">	s.extend([i])</div></pre></td></tr></table></figure>
+<ol>
+<li>将分数组合生成矩阵</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line">sm = np.mat(s)</div></pre></td></tr></table></figure>
+<ol>
+<li>构建权重的矩阵</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line">w = np.mat([<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.1</span>,<span class="number">0.1</span>])</div></pre></td></tr></table></figure>
+<ol>
+<li>矩阵相乘</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line">score = np.matrix.tolist(sm*w.T)  % w.T指将矩阵转置为列矩阵</div></pre></td></tr></table></figure>
+<p>这段代码使用了np.matrix.tolist将计算后得到的矩阵直接转换为list列表，后面的第6步和第7步考虑在Python中调用R来实现。</p>
+<h3 id="Python调用R分析数据"><a href="#Python调用R分析数据" class="headerlink" title="Python调用R分析数据"></a>Python调用R分析数据</h3><h4 id="数据的预处理"><a href="#数据的预处理" class="headerlink" title="数据的预处理"></a>数据的预处理</h4><p>首先，需要使用python生成csv文件以供R使用，当然也可以在R中使用rpy2包调用R来分析。</p>
+<ol>
+<li>使用python生成csv文件：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line">writer = csv.writer(file(<span class="string">"score.csv"</span>,<span class="string">'wb'</span>))</div><div class="line">writer.writerow([<span class="string">'Value'</span>])</div><div class="line"></div><div class="line"><span class="keyword">for</span> s <span class="keyword">in</span> score:</div><div class="line">	writer.writerow(s)</div></pre></td></tr></table></figure>
+<ol>
+<li>在R中导入数据：</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><div class="line">rm(list = ls())</div><div class="line">setwd(<span class="string">"/Users/eggs/Library/Mobile Documents/com~apple~CloudDocs/文档/document"</span>)</div><div class="line">score &lt;- read.csv(<span class="string">"score.csv"</span>,header = <span class="literal">TRUE</span>)</div></pre></td></tr></table></figure>
+<h4 id="怎样分析数据？"><a href="#怎样分析数据？" class="headerlink" title="怎样分析数据？"></a>怎样分析数据？</h4><p>其实分析的思路挺简单，总共有729个总体值，但实际上计算出来的Score值只有21个，所以我们要考虑每个Score值占总体组合的概率。一般我们考虑CDF（cumulative distribution function）就是累积分布函数：</p>
+<p>$$<br>F(X) = F(x \leq X) =<br>\begin{cases}<br>\sum_{i=1}^{x \leq X}P_{x=i}， &amp; \text{x是离散的}  \\[3ex]<br>\int_{-\infty}^{X} f(x)\,dx， &amp; \text{x是连续的}<br>\end{cases}<br>$$</p>
+<p>所以我们可以在R中画出Score的累积分布函数图。</p>
+<h4 id="画累积分布函数图"><a href="#画累积分布函数图" class="headerlink" title="画累积分布函数图"></a>画累积分布函数图</h4><ol>
+<li>画出累积分布图</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><div class="line">par(family=<span class="string">'MicrosoftYaHei'</span>)</div><div class="line">plot(ecdf(score$Value), do.points=<span class="literal">FALSE</span>, verticals=<span class="literal">TRUE</span>, main = <span class="string">'CDF of score'</span>, xlab = <span class="string">'score'</span>, ylab = <span class="string">'CDF'</span> )</div></pre></td></tr></table></figure>
+<p>画出来的图如下：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/cdfofscore.png" alt="测试分数的累计分布图"></p>
+<ol>
+<li>用分位数工具取数</li>
+</ol>
+<p>我们假设取[20%, 80%]分位数的值：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><div class="line">y &lt;- quantile(score$Value,c(<span class="number">0.2</span>,<span class="number">0.8</span>))</div><div class="line"></div><div class="line"> <span class="number">20</span>%  <span class="number">80</span>% </div><div class="line"><span class="number">42.5</span> <span class="number">57.5</span></div></pre></td></tr></table></figure>
+<p>那么，我们可以认为：</p>
+<blockquote>
+<p>分数在[0,25)之间的为谨慎型，当然这一类别是理论值，不会通过问卷计算出来<br>分数在[25,42.5]之间的为保守型，占20%比例<br>分数在(42.5,57.5]之间的为谨慎型，占60%比例<br>分数在(57.5,75]之间的为积极型，占20%比例</p>
+</blockquote>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>在这里简单的做了一个关于风险评测的计算介绍，由于最近比较忙，所以内容写的也不怎么严谨。简单说就是思路清奇，排版华丽（你知道我说的是反话）。而且最近也没写什么，所以只是恰好碰到问题就随便写了篇，姑且看着吧。</p>
+<p>python代码如下：<br><figure class="highlight python"><table><tr><td class="code"><pre><div class="line">__author__ = <span class="string">"Eggs"</span></div><div class="line"><span class="comment"># coding: utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> itertools</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> csv</div><div class="line"></div><div class="line">s = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.product([<span class="number">25</span>,<span class="number">50</span>,<span class="number">75</span>], repeat = <span class="number">6</span> ):</div><div class="line">  s.extend([i])</div><div class="line"></div><div class="line">sm = np.mat(s)</div><div class="line">w = np.mat([<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.1</span>,<span class="number">0.1</span>])</div><div class="line"></div><div class="line">score = np.matrix.tolist(sm*w.T)</div><div class="line"></div><div class="line">writer = csv.writer(file(<span class="string">"score.csv"</span>,<span class="string">'wb'</span>))</div><div class="line">writer.writerow([<span class="string">'Value'</span>])</div><div class="line"></div><div class="line"><span class="keyword">for</span> s <span class="keyword">in</span> score:</div><div class="line">  writer.writerow(s)</div></pre></td></tr></table></figure></p>
+<p>R的代码如下：<br><figure class="highlight r"><table><tr><td class="code"><pre><div class="line">rm(list = ls())</div><div class="line">setwd(<span class="string">"/Users/eggs/Library/Mobile Documents/com~apple~CloudDocs/文档/document"</span>)</div><div class="line">score &lt;- read.csv(<span class="string">"score.csv"</span>,header = <span class="literal">TRUE</span>)</div><div class="line">a &lt;- unique(score$Value)</div><div class="line"></div><div class="line">par(family=<span class="string">'MicrosoftYaHei'</span>)</div><div class="line">plot(ecdf(score$Value), do.points=<span class="literal">FALSE</span>, verticals=<span class="literal">TRUE</span>, main = <span class="string">'CDF of score'</span>, xlab = <span class="string">'score'</span>, ylab = <span class="string">'CDF'</span> )</div><div class="line">y &lt;- quantile(score$Value,c(<span class="number">0.2</span>,<span class="number">0.8</span>))</div><div class="line"></div><div class="line">length(score$Value)</div><div class="line">length(a)</div><div class="line">y</div></pre></td></tr></table></figure></p>
+<p>运行的结果如下：<br><figure class="highlight r"><table><tr><td class="code"><pre><div class="line">&gt; length(score$Value)</div><div class="line">[<span class="number">1</span>] <span class="number">729</span></div><div class="line">&gt; length(a)</div><div class="line">[<span class="number">1</span>] <span class="number">21</span></div><div class="line">&gt; y</div><div class="line"> <span class="number">20</span>%  <span class="number">80</span>% </div><div class="line"><span class="number">42.5</span> <span class="number">57.5</span></div></pre></td></tr></table></figure></p>
+<p>一个测试：如果我们把题目答案扩展到4个，题目增加为10个，计算的结果如下：<br><figure class="highlight r"><table><tr><td class="code"><pre><div class="line">&gt; length(score$Value)</div><div class="line">[<span class="number">1</span>] <span class="number">1048576</span></div><div class="line">&gt; length(a)</div><div class="line">[<span class="number">1</span>] <span class="number">119</span></div><div class="line">&gt; y</div><div class="line"> <span class="number">20</span>%  <span class="number">80</span>% </div><div class="line"><span class="number">43.5</span> <span class="number">56.5</span></div></pre></td></tr></table></figure></p>
+<p>可见总共的样本超过了100万，我们可以用图形观察如下：</p>
+<p>CDF图形：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/uscore.png" alt="CDF"></p>
+<p>概率密度图形：<br><img src="http://7viihf.com1.z0.glb.clouddn.com/density.png" alt="Denstiy"></p>
+<p>可见样本越多，图形越平滑，而且其分布越接近正态分布（极限中心定理）</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+            <a href="/tags/技术/" rel="tag"><i class="fa fa-tag"></i> 技术</a>
+          
+            <a href="/tags/数据分析/" rel="tag"><i class="fa fa-tag"></i> 数据分析</a>
+          
+            <a href="/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017-05-25-使用hexo-github搭建静态blog/" rel="next" title="使用hexo+github搭建静态blog">
+                <i class="fa fa-chevron-left"></i> 使用hexo+github搭建静态blog
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017-04-19-学习R系列-1-介绍及安装/" rel="prev" title="数据分析系列-R-初探-介绍和安装">
+                数据分析系列-R-初探-介绍和安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Eggs" />
+          <p class="site-author-name" itemprop="name">Eggs</p>
+           
+              <p class="site-description motion-element" itemprop="description">一个爱思考爱学习的傻子</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/allenmagic" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zyx1986" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/a90ae112a3ae" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-lemon-o"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取所有组合"><span class="nav-number">3.</span> <span class="nav-text">获取所有组合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何计算？"><span class="nav-number">4.</span> <span class="nav-text">如何计算？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复习下矩阵计算"><span class="nav-number">5.</span> <span class="nav-text">复习下矩阵计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python计算逻辑和代码"><span class="nav-number">6.</span> <span class="nav-text">Python计算逻辑和代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python调用R分析数据"><span class="nav-number">7.</span> <span class="nav-text">Python调用R分析数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据的预处理"><span class="nav-number">7.1.</span> <span class="nav-text">数据的预处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#怎样分析数据？"><span class="nav-number">7.2.</span> <span class="nav-text">怎样分析数据？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#画累积分布函数图"><span class="nav-number">7.3.</span> <span class="nav-text">画累积分布函数图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结束语"><span class="nav-number">8.</span> <span class="nav-text">结束语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-space-shuttle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eggs的博客</span>
+</div>
+
+
+<div class="powered-by">
+  由  Eggs创建
+</div>
+
+<div class="theme-info">
+  不折腾会死 - 想学啊，我教你呀!
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
